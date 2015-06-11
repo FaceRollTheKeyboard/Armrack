@@ -91,6 +91,20 @@ var modal = avalon.define({
             document.body.style.overflowY = "auto"
         }
 
+    },
+    //使用路由关闭
+    getOutByRouter:function(){
+        if (modal.toggle) {
+            modal.y = "-400";//鼠标Y坐标&left
+            window.setTimeout(function () {
+                modal.mw = "0";//模态框宽度
+                modal.mh = "0";//模态框高度
+
+                modal.times=0;
+                modal.toggle = false;
+            }, 100)
+            document.body.style.overflowY = "auto"
+        }
     }
 
 

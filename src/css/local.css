@@ -1,4 +1,4 @@
-a:hover{
+a:hover,a:active,a:link{
     text-decoration: none;
 }
 .lo-nav{

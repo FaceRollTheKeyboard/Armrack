@@ -1,5 +1,8 @@
 <div ms-controller="ui">
-   <div ms-repeat="list">
-       {{el.name}}
-   </div>
+    <ul>
+        <li ms-repeat="list">
+            <a ms-attr-href='"#!/"+el.name'>{{el.name}}</a>
+        </li>
+    </ul>
+
 </div>

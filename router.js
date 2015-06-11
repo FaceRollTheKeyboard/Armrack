@@ -11,6 +11,7 @@ require(["mmRouter", "mmRequest", "nav"], function () {
 
             //构建路由
             avalon.router.get('/'+ n, function () {
+                modal.getOutByRouter()
                 layout.url = "./ui/"+ n+"/doc.html"
                 require([path],function(){
                     console.log(n+"加载成功")
@@ -26,7 +27,7 @@ require(["mmRouter", "mmRequest", "nav"], function () {
     //监听路由
     avalon.router.get('/', function () {
         //调用门禁
-
+        modal.getOutByRouter()
         layout.url = "./body/home.html"
         //加载所依赖的VM
         require(["home"],function(){

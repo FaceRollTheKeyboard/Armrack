@@ -8,11 +8,11 @@ define("nav",["avalon"],function(){
         navItems:[
             {
                 name:"首页",
-                href:"./"
+                href:"#!/"
             },
             {
                 name:"组件列表",
-                href:"./#!/list"
+                href:"#!/list"
             }
         ]
     })
