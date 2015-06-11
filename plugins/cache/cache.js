@@ -2,8 +2,7 @@
  * Created by mooshroom on 2015/5/30 0030.
  * 本地存储模块，将所有需要缓存的内容进行统一存储
  */
-define('cache', function () {
-    return cache = {
+var cache = {
 
         //内存数据
         data: {},
@@ -139,5 +138,5 @@ define('cache', function () {
 
         }
     }
-})
+
 cache.ready()

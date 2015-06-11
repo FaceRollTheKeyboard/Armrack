@@ -11,8 +11,6 @@ require.config({
         stb:'../../plugins/strawberry/stb.js',
 
         //soul
-        nav:'../../soul/public/nav.js',
-        home:'../../soul/home.js'
     }
 
 });
