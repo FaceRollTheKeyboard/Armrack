@@ -1,0 +1,40 @@
+.modal-bg{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1040;
+
+    overflow: hidden;
+
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(236, 236, 236, 0.39);
+}
+.modal-box{
+    position: absolute;
+    overflow: hidden;
+
+
+}
+.modal-bg,.modal-box{
+    transition-property:all;
+    transition-duration: 0.24s;
+    transition-timing-function: ease-out;
+    /* Firefox 4 */
+    -moz-transition-property:all;
+    -moz-transition-duration:0.24s;
+    -moz-transition-timing-function:ease-out;
+    /* Safari 和 Chrome */
+    -webkit-transition-property:all;
+    -webkit-transition-duration:0.24s;
+    -webkit-transition-timing-function:ease-out;
+    /* Opera */
+    -o-transition-property:all;
+    -o-transition-duration:0.24s;
+    -o-transition-timing-function:ease-out;
+}

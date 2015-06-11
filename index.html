@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><!-- 页头引入-->
+<head ms-controller="head"><title>名称</title>
+    <meta content="名称" name="Description">
+    <meta content="名称" name="Keywords">
+    <meta charset="UTF-8">
+    <!-- 坑爹的IE兼容-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- 坑爹的将360默认为极速模式打开-->
+    <meta name="renderer" content="webkit">
+    <!-- 移动优先-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 图标引入--><!-- bootstrap引入-->
+    <link href="./src/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <!-- 引入btn-->
+    <link href="./src/css/button.css" rel="stylesheet" type="text/css">
+    <!-- fontAwesone 引入-->
+    <link href="./src/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!--if lte IE 7link(href="./src/css/font-awesome-ie7.min.css", rel="stylesheet", type="text/css")--><!-- 本地CSS-->
+    <link href="./src/css/mooshroom.css" rel="stylesheet">
+    <link href="./src/css/local.css" rel="stylesheet">
+    <!-- todo 所有插件的样式在js内部加载--></head>
+<body><!-- 内容开始-->
+<div ms-controller="layout"><!-- 弹出框-->
+    <div ms-controller="modal">
+        <div id="myModal" ms-visible="toggle" ms-click="getOut" class="modal-bg">
+            <div ms-css-left="x" ms-css-top="y" ms-css-height="mh" ms-css-width="mw" class="modal-box">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div ms-include-src="url"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 导航-->
+    <div ms-include-src="nav"></div>
+    <!-- 主体-->
+    <div ms-include-src="url"></div>
+    <!-- 页脚-->
+    <div ms-include-src="footer"></div>
+    <!-- 提示-->
+    <div ms-include-src="tip"></div>
+</div>
+<!-- jquery-->
+<script src="./src/js/jquery-1.10.2.min.js" type="text/javascript"></script>
+<!--if lt IE 9script(src="./src/js/html5shiv.min.js")
+script(src="./src/js/respond.min.js")--><!-- bootstrap-->
+<script src="./src/js/bootstrap.min.js"></script>
+<!-- avalon-->
+<script src="./src/js/avalon.js"></script>
+<script src="./src/js/mmRequest.js"></script>
+<!--if lt IE 9script(src="./src/js/mmRouter.js")--><!-- 插件引入-->
+<script src="./plugins/cache/cache.js"></script>
+<script src="./plugins/tip/tip.js"></script>
+<script src="./plugins/call/call.js"></script>
+<script src="./plugins/door/door.js"></script>
+<script src="./plugins/validate/regCheckOut.js"></script>
+<!-- 控制器引入-->
+<script src="./config.js"></script>
+<script src="./router.js"></script>
+<script src="./layout.js"></script>
+<script>
+    require(['nav', 'modal'], function () {
+        nav.ready();
+        modal.ready();
+        tip.ready();
+        avalon.scan()
+    })
+</script>
+</body>
+</html>
