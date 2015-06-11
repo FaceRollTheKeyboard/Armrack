@@ -28,12 +28,11 @@
 <body><!-- 内容开始-->
 <div ms-controller="layout">
 
-
+    <div ms-include-src="nav"></div>
     <!-- 主体-->
     <div ms-include-src="url"></div>
     <!-- 页脚-->
     <div ms-include-src="footer"></div>
-
 
 
     <!-- 提示-->
@@ -42,11 +41,8 @@
     <div ms-controller="modal">
         <div id="myModal" ms-visible="toggle" ms-click="getOut" class="modal-bg">
             <div ms-css-left="x" ms-css-top="y" ms-css-height="mh" ms-css-width="mw" class="modal-box">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div ms-include-src="url"></div>
-                    </div>
-                </div>
+                <div ms-include-src="url"></div>
+
             </div>
         </div>
     </div>
@@ -65,15 +61,17 @@
 <script src="./plugins/call/call.Mobile.js"></script>
 <script src="./plugins/door/door.js"></script>
 <script src="./plugins/validate/regCheckOut.js"></script>
+<script src="./plugins/modal/modal.js"></script>
 <!-- 控制器引入-->
 <script src="./config.js"></script>
 <script src="./router.js"></script>
 <script src="./layout.js"></script>
 <script>
-avalon.ready(function(){
-    tip.ready();
-})
+    avalon.ready(function () {
+        tip.ready();
 
+
+    })
 
 
 </script>
