@@ -29,6 +29,10 @@ require(["mmRouter", "mmRequest", "nav"], function () {
 
         layout.url = "./body/home.html"
         //加载所依赖的VM
+        require(["home"],function(){
+            home.ready()
+            avalon.scan()
+        })
     });
 
     //组件列表
