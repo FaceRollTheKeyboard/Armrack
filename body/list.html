@@ -1,5 +1,4 @@
-<button type="button" class="close pull-right" ms-click="getOutByBtn"
-        style="font-size: 70px;margin-top:-20px">
+<button type="button" class="close pull-right" style="font-size: 70px;margin-top:-20px" ms-click="getOutByBtn">
     <span aria-hidden="true">&times;</span>
 </button>
 <h3>
@@ -8,14 +7,19 @@
 <hr/>
 <div ms-controller="ui" class="ui-modal">
 
-    <div class="row">
-        <div class="col-sm-4" ms-repeat="list">
-            <a ms-attr-href='"#!/"+el.name' class="btn btn-primary btn-block btn-border"
-               style="height: auto;margin-bottom: 20px">
-                <h4>{{el.name}}</h4>
-                <small>{{el.info}}</small>
+
+        <div  ms-repeat="list">
+            <a ms-attr-href='"#!/"+el.name' class="btn btn-default btn-block btn-3d  btn-large"
+               style="height: auto;margin-bottom: 20px;text-align: left">
+                <h2>{{el.name}}
+                    <small>
+                        ---{{el.info}}
+                    </small>
+                </h2>
+
             </a>
+
         </div>
-    </div>
+
 
 </div>

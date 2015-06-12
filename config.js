@@ -78,18 +78,5 @@ function setCookie(name, value) {
 }
 
 
-function getDoc(url){
-    require(["marked", "prettify",'css!MDcss'],function(){
-        avalon.ajax({
-            type:"get",
-            url:url,
-            success:function(res){
-                layout.doc=marked(res)
-//                        console.log(res)
-                prettyPrint();
-            }
-        })
-    })
-}
 
 
