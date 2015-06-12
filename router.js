@@ -8,7 +8,7 @@ require(["mmRouter", "mmRequest", "nav"], function () {
         avalon.router.get('/' + n, function () {
             modal.getOutByRouter()
             var uiURL = './ui/' + n + "/";
-            layout.url = uiURL + "doc.html"
+            layout.url = uiURL + "demo.html"
             getDoc(uiURL + "README.md")
             require(["../../ui/" + n + "/" + n + '.js'], function () {
                 console.log(n + "加载成功")

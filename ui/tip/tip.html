@@ -1,0 +1,19 @@
+<!--提示框-->
+<div class="tip" >
+
+    <div ms-repeat="tips" class="tip-info alive-loading">
+        <span class="">{{el}}</span>
+        <button type="button"  class="close " ms-click="close($index,1)">
+            &times;
+        </button>
+
+    </div>
+
+    <div ms-repeat="tipsError" class="tip-err alive-loading">
+        <span class="">{{el}}</span>
+        <button type="button" class="close " ms-click="close($index,0)">
+            &times;
+        </button>
+
+    </div>
+</div>
