@@ -1,8 +1,14 @@
-<div ms-controller="ui">
-    <ul>
-        <li ms-repeat="list">
-            <a ms-attr-href='"#!/"+el.name'>{{el.name}}</a>
-        </li>
-    </ul>
+<div ms-controller="ui" class="ui-modal">
+
+    <div class="row">
+        <div class="col-sm-4" ms-repeat="list">
+            <a ms-attr-href='"#!/"+el.name' class="btn btn-primary btn-block btn-border"
+               style="height: auto;margin-bottom: 20px">
+                <h4>{{el.name}}</h4>
+                <small>{{el.info}}</small>
+            </a>
+
+        </div>
+    </div>
 
 </div>

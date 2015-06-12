@@ -1,6 +1,7 @@
 a:hover,a:active,a:link{
     text-decoration: none;
 }
+/*导航*/
 .lo-nav{
     height: 60px;
     border-bottom: #74a7bb solid 1px ;
@@ -22,4 +23,13 @@ a:hover,a:active,a:link{
 }
 .lo-nav ul li a:hover{
     color: #bbbbbb;
+}
+
+/*ui列表面板*/
+.ui-modal{
+
+    padding: 10px 20px;
+    background-color: #ffffff;
+    border-radius: 5px;
+
 }
