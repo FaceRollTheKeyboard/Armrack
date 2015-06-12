@@ -30,11 +30,23 @@
 
     <div ms-include-src="nav"></div>
     <!-- 主体-->
-    <div ms-include-src="url"></div>
+
+
+    <div class="container">
+        <br/>
+        <div ms-include-src="url"></div>
+
+        <div>
+            {{doc|html}}
+        </div>
+    </div>
     <!-- 页脚-->
     <div ms-include-src="footer"></div>
 
-
+    <!--to-top-->
+    <button ms-click="toTop" class="btn btn-primary btn-circle btn-giant to-top alive-btn">
+        <i class="icon-double-angle-up"></i>
+    </button>
     <!-- 提示-->
     <div ms-include-src="tip"></div>
     <!-- 弹出框-->
@@ -54,7 +66,7 @@
 <script src="./src/js/respond.min.js"></script>
 <![endif]-->
 <!-- avalon-->
-<script src="./src/js/avalon.js"></script>
+<script src="./src/js/avalon.modern.min.js"></script>
 <!--<script src="./src/js/mmRequest.js"></script>-->
 <script src="./plugins/cache/cache.js"></script>
 <script src="./plugins/tip/tip.js"></script>

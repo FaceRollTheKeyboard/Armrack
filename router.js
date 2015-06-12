@@ -8,6 +8,7 @@ require(["mmRouter", "mmRequest", "nav"], function () {
             avalon.router.get('/'+ n, function () {
                 modal.getOutByRouter()
                 layout.url = "./ui/"+ n+"/doc.html"
+                getDoc("./ui/"+ n+"/README.md")
                 require(["../../ui/"+n+"/"+n+'.js'],function(){
                     console.log(n+"加载成功")
                 })
@@ -22,10 +23,10 @@ require(["mmRouter", "mmRequest", "nav"], function () {
     avalon.router.get('/', function () {
         //调用门禁
         modal.getOutByRouter()
-        layout.url = "./body/home.html"
+        layout.url = ""
         //加载所依赖的VM
         require(["home"],function(){
-            home.ready()
+            getDoc("./README.md")
             avalon.scan()
         })
     });

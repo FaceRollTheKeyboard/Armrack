@@ -10,6 +10,10 @@ require.config({
         modal:'../../plugins/modal/modal.js',
         stb:'../../plugins/strawberry/stb.js',
 
+        marked:"../../plugins/MDEditor/markdown.js",
+        MDcss:"../../plugins/MDEditor/MDEditor.css",
+        prettify:"../../plugins/MDEditor/prettify.js",
+
         //soul
         home:"../../soul/home.js",
         nav:"../../soul/nav.js",
@@ -71,6 +75,21 @@ function setCookie(name, value) {
     var exp = new Date();
     exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
     document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+}
+
+
+function getDoc(url){
+    require(["marked", "prettify",'css!MDcss'],function(){
+        avalon.ajax({
+            type:"get",
+            url:url,
+            success:function(res){
+                layout.doc=marked(res)
+//                        console.log(res)
+                prettyPrint();
+            }
+        })
+    })
 }
 
 

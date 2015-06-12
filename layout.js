@@ -4,7 +4,11 @@ define('layout', function () {
         nav:"./body/public/nav.html",
         url: '',
         footer: './body/public/footer.html',
-        tip: './plugins/tip/tip.html'
+        tip: './plugins/tip/tip.html',
+        doc:"",
+        toTop:function(){
+            window.scrollTo(0,0)
+        }
     })
 });
 

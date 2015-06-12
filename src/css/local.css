@@ -25,11 +25,9 @@ a:hover,a:active,a:link{
     color: #bbbbbb;
 }
 
-/*ui列表面板*/
-.ui-modal{
-
-    padding: 10px 20px;
-    background-color: #ffffff;
-    border-radius: 5px;
-
+/*返回顶部按钮*/
+.to-top{
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
 }
