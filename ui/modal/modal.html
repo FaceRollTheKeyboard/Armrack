@@ -1,0 +1,43 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        模态框标题
+    </div>
+    <div class="panel-body">
+        <div id="doc-show" class="alive-hover markdown-preview live-sroll" style="display: block;"><h1 id="modal-js-">modal.js 模态框组件</h1>
+            <p>基于avalon的组件,当前兼容性：chrome，firefox，ie7 ie9 ie10 ie11</p>
+            <hr>
+            <h2 id="-">功能介绍：</h2>
+            <p>modal.js是一个基于avalon的弹出框组件,特点是他会在点击触发按钮的位置开始弹出。动画基于css3</p>
+            <p>不过这个不是重点，重点是，他可以任意扩展，这里只是提供了弹出框的弹出关闭的动作，其样式根据所需自定义。而且，规范化了在一个网站上不同的弹出框公用一套弹出动作的实现方法。</p>
+            <h2 id="-">用法：</h2>
+            <p>1.首先在项目中引入modal.js以及modal.css。</p>
+            <p>2.在页面中编写结构层如下：</p>
+<pre class="alive-hover"><code class="prettyprint lang-html"><span class="com">&lt;!--modal 模态框--&gt;</span><span class="pln">
+    </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">ms-controller</span><span class="pun">=</span><span class="atv">"modal"</span><span class="tag">&gt;</span><span class="pln">
+        </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"modal-bg"</span><span class="pln"> </span><span class="atn">id</span><span class="pun">=</span><span class="atv">"myModal"</span><span class="pln"> </span><span class="atn">ms-visible</span><span class="pun">=</span><span class="atv">"toggle"</span><span class="pln"> </span><span class="atn">ms-click</span><span class="pun">=</span><span class="atv">"getOut"</span><span class="tag">&gt;</span><span class="pln">
+            </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">class</span><span class="pun">=</span><span class="atv">"modal-box"</span><span class="pln">
+                 </span><span class="atn">ms-css-left</span><span class="pun">=</span><span class="atv">"x"</span><span class="pln">
+                 </span><span class="atn">ms-css-top</span><span class="pun">=</span><span class="atv">"y"</span><span class="pln">
+                 </span><span class="atn">ms-css-height</span><span class="pun">=</span><span class="atv">"mh"</span><span class="pln">
+                 </span><span class="atn">ms-css-width</span><span class="pun">=</span><span class="atv">"mw"</span><span class="tag">&gt;</span><span class="pln">
+                </span><span class="com">&lt;!--modal 模态框内容映入点--&gt;</span><span class="pln">
+                </span><span class="tag">&lt;div</span><span class="pln"> </span><span class="atn">ms-include-src</span><span class="pun">=</span><span class="atv">"url"</span><span class="tag">&gt;&lt;/div&gt;</span><span class="pln">
+            </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+        </span><span class="tag">&lt;/div&gt;</span><span class="pln">
+    </span><span class="tag">&lt;/div&gt;</span></code></pre>
+            <p>3.在其他的地方编写模态框内部的内容，建立一个html文件例如："./plugins/modal.html"</p>
+            <p>4.触发：首先引入模态框内部的内容modal.html，再触发modal.getIn("模态框宽度")方法。代码如下:</p>
+<pre class="alive-hover"><code class="prettyprint lang-javascript"><span class="pln">modal</span><span class="pun">.</span><span class="pln">url</span><span class="pun">=</span><span class="str">"./plugins/modal.html"</span><span class="pun">;</span><span class="pln">
+modal</span><span class="pun">.</span><span class="pln">getIn</span><span class="pun">(</span><span class="lit">800</span><span class="pun">);</span></code></pre>
+            <p>5.关闭:调用方法getOut()代码如下:</p>
+            <pre class="alive-hover"><code class="prettyprint lang-javascript"><span class="pln">modal</span><span class="pun">.</span><span class="pln">getOut</span><span class="pun">();</span></code></pre>
+            <p>6.<strong>搞定！</strong></p>
+            <hr>
+            <p>The MIT License (MIT)</p>
+            <p>Copyright (c) 2015 mooshroom</p>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <a class="btn btn-default " ms-click="getOutByBtn">关闭</a>
+    </div>
+</div>
