@@ -1,1 +1,41 @@
-弹出框测试
+<div ms-controller="modal_demo">
+    <button class="btn btn-primary" ms-click="show">点击弹出</button>
+    <div ms-widget="modal,modal1,$opt">
+        <div style="width:500px;">
+            <a href="sdf">sdf </a><br/>
+            <a href="sdf">sdf </a><br/>
+            <a href="sdf">sdf </a><br/>
+            <a href="sdf">sdf </a><br/>
+            <a href="sdf">sdf </a><br/>
+            <a href="sdf">sdf </a><br/>
+            <a href="sdf">sdf </a><br/><a href="sdf">sdf </a><br/>
+            <a href="sdf">sdf </a><br/>
+            <a href="sdf">sdf </a><br/>
+            <a href="sdf">sdf </a><br/>
+            <a href="sdf">sdf </a><br/>
+            <a href="sdf">sdf </a><br/>
+            <a href="sdf">sdf </a><br/>
+            <a href="sdf">sdf </a><br/>
+            <a href="sdf">sdf </a><br/>
+            <a href="sdf">sdf </a><br/>
+            <a href="sdf">sdf </a><br/>
+            <a href="sdf">sdf </a><br/>
+            <a href="sdf">sdf </a><br/>
+        </div>
+    </div>
+</div>
+<script>
+    require(['../../ui/modal/modal.js'],function(){
+        var modal_demo=avalon.define({
+            $id:"modal_demo",
+            $opt:{
+
+            },
+            show:function(){
+                modal1.getIn()
+
+            }
+        })
+        avalon.scan()
+    })
+</script>
