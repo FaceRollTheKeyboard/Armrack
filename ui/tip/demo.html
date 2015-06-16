@@ -1,6 +1,9 @@
 <div ms-controller="tipDemo">
+
+    <!--关键代码-->
     <div ms-widget="tip,tip,$opt"></div>
 
+    <!--以下都是用户测试用的仪表盘-->
     <h2>提示框使用测试</h2>
     <div class="radio">
         <label>
@@ -23,12 +26,16 @@
     <button class="btn btn-default" ms-click="tipOff">点击关闭提示</button>
 </div>
 <script>
+
+    //引入组件，引入了就搞定了~
     require(["../../ui/tip/tip.js"],function(){
+
+        //配置父元素的VM
         var tipDemo=avalon.define({
             $id:"tipDemo",
             $opt:{},
             a:1,
-            text:"",
+            text:"233",
             time:3000,
             tipOn:function(){
                 tip.on(tipDemo.text,tipDemo.a,tipDemo.time)
