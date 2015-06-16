@@ -5,11 +5,11 @@ define("ui",["avalon"],function(){
     return ui=avalon.define({
         $id:"ui",
         ready:function(){
-
+            ui.list=cache.go("uiList")
         },
 
         //获取ui列表
-        list:cache.go("uiList")
+        list:[]
 
     })
 })

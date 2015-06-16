@@ -31,3 +31,13 @@ a:hover,a:active,a:link{
     bottom: 40px;
     right: 40px;
 }
+
+/*ui列表*/
+.UI{
+    position: fixed;
+
+}
+.ui-list-box{
+    max-height: 450px;
+    overflow-y: auto;
+}

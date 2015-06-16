@@ -10,10 +10,10 @@ define("nav",["avalon"],function(){
                 name:"首页",
                 href:"#!/"
             },
-            {
-                name:"组件列表",
-                href:"#!/list"
-            }
+//            {
+//                name:"组件列表",
+//                href:"#!/list"
+//            }
         ]
     })
 })

@@ -1,25 +1,37 @@
-<button type="button" class="close pull-right" style="font-size: 70px;margin-top:-20px" ms-click="getOutByBtn">
-    <span aria-hidden="true">&times;</span>
-</button>
-<h3>
-    组件列表
-</h3>
-<hr/>
-<div ms-controller="ui" class="ui-modal">
+<!--<button type="button" class="close pull-right" style="font-size: 70px;margin-top:-20px" ms-click="getOutByBtn">-->
+    <!--<span aria-hidden="true">&times;</span>-->
+<!--</button>-->
 
+<div ms-controller="ui" class="UI" style="">
 
-        <div  ms-repeat="list">
-            <a ms-attr-href='"#!/"+el.name' class="btn btn-default btn-block btn-3d  btn-large"
-               style="height: auto;margin-bottom: 20px;text-align: left">
-                <h2>{{el.name}}
+    <h3>
+        组件列表
+    </h3>
+    <hr/>
+    <div class="ui-list-box">
+        <div  ms-repeat="list" style="margin-bottom: 8px;">
+            <a ms-attr-href='"#!/"+el.name'
+               style="height: auto;text-align: left">
+                <strong>{{el.name}}
                     <small>
                         ---{{el.info}}
                     </small>
-                </h2>
+                </strong>
 
             </a>
 
         </div>
+    </div>
+
 
 
 </div>
+<script>
+    require(["ui"], function () {
+        setTimeout(function(){
+            ui.ready()
+        },300)
+
+        avalon.scan()
+    })
+</script>

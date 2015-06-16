@@ -6,7 +6,7 @@ require(["mmRouter", "mmRequest", "nav"], function () {
     //根据UI表创建对应的路由和模块配置
     function newRouter(n) {
         avalon.router.get('/' + n, function () {
-            modal.getOutByRouter()
+//            modal.getOutByRouter()
             var uiURL = './ui/' + n + "/";
             layout.url = uiURL + "demo.html"
             getDoc(uiURL + "README.md")
@@ -35,7 +35,7 @@ require(["mmRouter", "mmRequest", "nav"], function () {
     //监听路由
     avalon.router.get('/', function () {
         //调用门禁
-        modal.getOutByRouter()
+//        modal.getOutByRouter()
         layout.url = "./body/none.html"
         //加载所依赖的VM
         require(["home"], function () {
@@ -44,17 +44,7 @@ require(["mmRouter", "mmRequest", "nav"], function () {
         })
     });
 
-    //组件列表
-    avalon.router.get('/list', function () {
-        //调用门禁
-        modal.getIn(500)
-        modal.url = "./body/list.html"
-        require(["ui"], function () {
-            ui.ready()
-            avalon.scan()
-        })
-        //加载所依赖的VM
-    });
+
 
     //获取ui列表
     avalon.ajax({
