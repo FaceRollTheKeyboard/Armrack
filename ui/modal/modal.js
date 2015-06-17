@@ -19,14 +19,16 @@ define([
                 ///初始化配置
 
                 element.setAttribute("ms-visible", "toggle")
-                element.setAttribute("ms-css-top", "top")
-                element.setAttribute("ms-css-left", "left")
-                element.setAttribute("ms-css-width", "width")
-                element.setAttribute("ms-css-height", "height")
-                element.setAttribute("ms-css-opacity", "opacity")
-                element.setAttribute("ms-css-transform", "transform")
+
+//                element.setAttribute("ms-css-width", "width")
+//                element.setAttribute("ms-css-height", "height")
+
+                element.setAttribute("ms-css-padding-top", "top")
+                element.setAttribute("ms-css-padding-left", "left")
                 element.setAttribute("ms-click", "getOut")
                 element.className = 'modal'
+                element.children[0].setAttribute("ms-css-opacity", "opacity")
+                element.children[0].setAttribute("ms-css-transform", "transform")
                 element.children[0].setAttribute('ms-on-mouseover','can(false)')
                 element.children[0].setAttribute('ms-on-mouseleave','can(true)')
                 //扫描
@@ -40,8 +42,14 @@ define([
                     ev = ev || window.event;
                     var mousePos = mouseCoords(ev);
 //alert(ev.pageX);
-                    vm.mx = mousePos.x;
-                    vm.my = mousePos.y;
+                    if(!vm.toggle){
+                        vm.left=vm.mx = mousePos.x;
+                        vm.top=vm.my = mousePos.y;
+                    }
+                    else{
+                        vm.mx = mousePos.x;
+                        vm.my = mousePos.y;
+                    }
                 }
 
                 function mouseCoords(ev) {
@@ -77,8 +85,6 @@ define([
 
             top: 0,
             left: 0,
-            width: 0,
-            height: 0,
             opacity: 1,
             transform: "scale(0)",
 
@@ -87,20 +93,40 @@ define([
             , getIn: function () {
 
 
-                vm.left = vm.sx = vm.mx - 30;
-                vm.top = vm.sy = vm.my - 10;
+
+
+                  vm.sx = vm.left
+                  vm.sy = vm.top
                 vm.toggle = true;
 
 
                 window.setTimeout(function () {
+                    var ww=window.innerWidth || window.screen.availWidth;
+                    console.log("ww:"+ww)
+                    var bw=element.children[0].style.width
+                    console.log("bw:"+bw)
 
+                    if(bw==""||bw=="auto"){
+                        //宽度为auto
+                        vm.left=0
+                    }
+                    else if(bw.charAt(bw.length-1)=="%"){
+                        //宽度为百分比
+                        var num=Number(bw.slice(0,bw.length-1))
+                        vm.left=ww*(100-num)/100/2
+                    }
+                    else if(bw.slice(bw.length-2,bw.length)=="px"){
+                        var num=Number(bw.slice(0,bw.length-2))
+                        vm.left=(ww-num)/2
+                    }
 
-                    vm.opacity = 1
+                    vm.top="8%"
+//                    vm.opacity = 1
                     vm.width = "100%"
                     vm.height = "100%"
-                    vm.left = vm.top = 0
+//                    vm.left = vm.top = 0
                     vm.transform = "scale(1)"
-                }, 100)
+                }, 50)
                 document.body.style.overflowY = "hidden";
                 vm.times++
 
@@ -114,16 +140,19 @@ define([
             , getOut: function () {
                 if (vm.canGetOut && vm.toggle) {
 //            vm.mousePos();
-                    vm.width = 0
-                    vm.height = 0
+//                    vm.width = 0
+//                    vm.height = 0
 
-                    window.setTimeout(function () {
-                        vm.opacity = 0
+
+//                        vm.opacity = 0
                         vm.left = vm.sx
                         vm.top = vm.sy
                         vm.transform = "scale(0)"
 //                        vm.toggle = false;
-                    }, 100)
+
+                    window.setTimeout(function () {
+                        vm.toggle = false;
+                    }, 250)
                     document.body.style.overflowY = "auto"
 
                 }
