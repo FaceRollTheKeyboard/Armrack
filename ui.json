@@ -31,38 +31,6 @@
         {
             "name": "tab",
             "info":"标签页组件"
-        },
-        {
-            "name": "tip",
-            "info":" tip系统提示组件"
-        },
-        {
-            "name": "modal",
-            "info":"弹出框组件"
-        },
-        {
-            "name": "MDEditor",
-            "info":"markdown编辑器组件"
-        },
-        {
-            "name": "datePicker",
-            "info":"日期选择组件"
-        },
-        {
-            "name": "fileUp",
-            "info":"文件上传组件"
-        },
-        {
-            "name": "imgUp",
-            "info":"图片上传组件"
-        },
-        {
-            "name": "alive",
-            "info":"css3动效库"
-        },
-        {
-            "name": "tab",
-            "info":"标签页组件"
         }
     ]
 
