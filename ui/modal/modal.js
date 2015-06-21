@@ -1,225 +1,181 @@
 /**
- * Created by mooshroom on 2015/3/25.
+ * Created by mooshroom on 2015-06-12.
+ * modal弹出框组件
+ * 版本：V2.0.0
+ * 使用avalon组件模式重构
  */
-define('stb', function () {
-    return stb = avalon.define({
-        $id: 'stb',
-        aIndex: 0,//当前选中的标签索引
-        ready: function () {
-            require.config({
-                paths: {
-                    stbcss: "../../plugins/stb/stb.css"
+define([
+    "avalon",
+    'css!../../ui/modal/modal.css'
+], function (avalon, css) {
+    var widget = avalon.ui.modal = function (element, data, vmodels) {
+        var options = data.modalOptions
+        var objId = data.modalId
+        var vm = avalon.define({
+            $id: objId,
+            $init: function () {
+
+
+                ///初始化配置
+
+                element.setAttribute("ms-visible", "toggle")
+
+//                element.setAttribute("ms-css-width", "width")
+//                element.setAttribute("ms-css-height", "height")
+
+                element.setAttribute("ms-css-padding-top", "top")
+                element.setAttribute("ms-css-padding-left", "left")
+                element.setAttribute("ms-click", "getOut")
+                element.className = 'modal'
+                element.children[0].setAttribute("ms-css-opacity", "opacity")
+                element.children[0].setAttribute("ms-css-transform", "transform")
+                element.children[0].setAttribute('ms-on-mouseover','can(false)')
+                element.children[0].setAttribute('ms-on-mouseleave','can(true)')
+                //扫描
+                avalon.scan(element, [vm].concat(vmodels))
+                if (typeof vm.onInit === "function") {
+                    vm.onInit.call(element, vm, options, vmodels)
                 }
-            })
-            require(['css!stbcss'], function () {
-            })
-        },
 
-        tab: function (id) {//点击切换标签事件
-            stb.aIndex = id;
-        },
-
-
-        //验证登陆用户名
-        login_account: '',
-        login_acctip: '',
-        loginAccFlag: 0,
-        verifyLoginName: function () {
-            if (stb.login_account == '') {
-                stb.login_acctip = '用户名不能为空';
-                stb.loginAccFlag = 1;
-            }
-            else {
-                stb.login_acctip = '';
-                stb.loginAccFlag = 0;
-                return 1;
-            }
-        },
-        //验证登陆密码
-        login_pwd: '',
-        login_pwdtip: '',
-        loginPwdFlag: 0,
-        verifyLoginPwd: function () {
-            if (stb.login_pwd == '') {
-                stb.login_pwdtip = '密码不能为空';
-                stb.loginPwdFlag = 1;
-            }
-            else {
-                stb.login_pwdtip = '';
-                stb.loginPwdFlag = 0;
-                return 1;
-            }
-        },
-        //验证注册账户
-        account: '',
-        nameTip: '用户名不能以数字开头',
-        verifyUsername: function (account) {
-            var tip = regCheckOut.verifyUsername(account);
-            if (tip == 1) {
-                //添加对号
-                stb.nameFlag = 1;
-                return 1;
-            }
-            else {
-                stb.nameFlag = 2;
-                stb.nameTip = tip;
-            }
-        },
-        //验证注册账户密码
-        pwd: '',
-        pwdTip: '密码6位以上',
-        pwdFlag: 0,
-        verifyPassword: function (pwd) {
-            var tip = regCheckOut.verifyPassword(pwd);
-            if (tip == 1) {
-                //添加对号
-                stb.pwdFlag = 1;
-                return 1;
-            }
-            else {
-                stb.pwdFlag = 2;
-                stb.pwdTip = tip;
-            }
-        },
-        //验证注册重复密码
-        rePwd: "",
-        rePwdFlag: "",
-        rePwdTip: "",
-        verifyRePassword: function () {
-            if (stb.pwd === stb.rePwd) {
-//                验证通过
-                stb.rePwdFlag = 1;
-                return 1;
-            }
-            else {
-                stb.rePwdFlag = 0;
-                stb.rePwdTip = "两次输入密码不一致！？";
-                return 0
-            }
-        },
-        //验证注册账户邮箱
-        email: '',
-        emailTip: '合法邮箱格式',
-        nameFlag: 0,
-        emailFlag: 0,
-        verifyEmail: function (em) {
-            var tip = regCheckOut.verifyEmail(em);
-            if (tip == 1) {
-                //添加对号
-                stb.emailFlag = 1;
-                return 1;
-            }
-            else {
-                stb.emailFlag = 2;
-                stb.emailTip = tip;
-            }
-
-        },
-        //验证找回密码邮箱
-        findEmail: '',
-        findEmailTip: '合法邮箱格式',
-        findEmailFlag: 0,
-        verifyFindEmail: function (em) {
-            var tip = regCheckOut.verifyEmail(em);
-            if (tip == 1) {
-                //添加对号
-                stb.findEmailFlag = 1;
-                return 1;
-            }
-            else {
-                stb.findEmailFlag = 2;
-                stb.findEmailTip = tip;
-
-            }
-
-        },
-        //    登录
-
-        login: function () {
-            if (stb.verifyLoginName() == 1 && stb.verifyLoginPwd() == 1) {
-                stb.loginFlag = 0;
-                $.call({
-                    type: 'post',
-                    i: 5,
-                    data: {account: stb.login_account, pwd: stb.login_pwd},
-                    success: function (data) {
-                        if (data.c == 200) {
-                            tip.on("登录成功", 1, 3000)
-                            door.logined = true;
-                            cache.go({
-                                "tsy": data.tsy,
-                                "un": data.un,
-                                "uid": data.uid
-                            })
-                            modal.mustOut()
-                            nav.inSide=true;
-                            nav.user.UserName=data.un
-                            door.locked = false;
-                            //跳转首页
-                            window.location.href="./index.html#!/"
-                        }
-                        //401   用户名或密码错误
-                        else if (data.c == 401) {
-                            tip.on('用户名或密码错误', 0, 5000);
-                        }
-                        else {
-                            tip.on('未知错误', 0, 5000);
-                        }
+                /***********获取鼠标位置****************/
+                function mouseMove(ev) {
+                    ev = ev || window.event;
+                    var mousePos = mouseCoords(ev);
+//alert(ev.pageX);
+                    if(!vm.toggle){
+                        vm.left=vm.mx = mousePos.x;
+                        vm.top=vm.my = mousePos.y;
                     }
-                });
-            }
-        },
-        //注册
-
-        reg: function () {
-            if ((stb.verifyUsername(stb.account) == 1)
-                && (stb.verifyPassword(stb.pwd) == 1)
-                && (stb.verifyEmail(stb.email) == 1)
-                && (stb.verifyRePassword() == 1)) {
-                //发出请求
-                $.call({
-                    type: 'post',
-                    i: 8,
-                    data: {username: stb.account, pwd: stb.pwd, email: stb.email},
-                    success: function (data) {
-                        if (data.c == 200) {
-                            tip.on('注册成功', 1, 3000);
-                            stb.tab(0)
-                        }
-                        else {
-                            tip.on('注册失败:' + data.c + data.m, 0.3000);
-                        }
+                    else{
+                        vm.mx = mousePos.x;
+                        vm.my = mousePos.y;
                     }
-                });
-            }
-        },
+                }
 
-        //发送验证码到邮箱
-
-        reset: function () {
-            if (stb.verifyFindEmail(stb.findEmail) == 1) {
-                alert('稍后你将收到帐号激活的电子邮件');
-                $.call({
-                    type: 'post',
-                    i: '22',
-                    data: {Email: stb.findEmail},
-                    success: function (data) {
-                        if (data.c == 200) {
-                            alert('发送验证码到邮箱成功');
-                        }
-                        else {
-                            alert(data.m);
-//                            tip.on(data.m,0);
-//                            setTimeout(function(){
-//                                tip.on(data.m,0);
-//                            },3000);
-                        }
+                function mouseCoords(ev) {
+                    if (ev.pageX || ev.pageY) {
+                        return {x: ev.pageX, y: ev.pageY};
                     }
-                });
+                    return {
+                        x: ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+                        y: ev.clientY + document.body.scrollTop - document.body.clientTop
+                    };
+                }
+
+                document.onmousemove = mouseMove;
+            },
+            $remove: function () {
+//                element.innerHTML = ""
+
+            },
+            onInit: function () {
+
+            },
+
+            /*具体实现*/
+            url: "",
+            toggle: false,
+            //*获取全局变量*/
+
+            mx: 0,//鼠标X坐标
+            my: 0,//鼠标Y坐标
+
+            sx: 0,//弹框开始位置X坐标
+            sy: 0,//弹框开始位置Y坐标
+
+            top: 0,
+            left: 0,
+            opacity: 1,
+            transform: "scale(0)",
+
+            times: 0
+            //*模态框弹出*/
+            , getIn: function () {
+
+
+
+
+                vm.sx = vm.left
+                vm.sy = vm.top
+                vm.toggle = true;
+
+
+                window.setTimeout(function () {
+                    var ww=window.innerWidth || window.screen.availWidth;
+                    console.log("ww:"+ww)
+                    var bw=element.children[0].style.width
+                    console.log("bw:"+bw)
+
+                    if(bw==""||bw=="auto"){
+                        //宽度为auto
+                        vm.left=0
+                    }
+                    else if(bw.charAt(bw.length-1)=="%"){
+                        //宽度为百分比
+                        var num=Number(bw.slice(0,bw.length-1))
+                        vm.left=ww*(100-num)/100/2
+                    }
+                    else if(bw.slice(bw.length-2,bw.length)=="px"){
+                        var num=Number(bw.slice(0,bw.length-2))
+                        vm.left=(ww-num)/2
+                    }
+
+                    vm.top=120
+                    vm.width = "100%"
+                    vm.height = "100%"
+                    vm.transform = "scale(1)"
+                }, 50)
+                document.body.style.overflowY = "hidden";
+                vm.times++
+
+
+            },
+            canGetOut: true,
+            can: function (val) {
+                vm.canGetOut = val
+            }
+            //*模态框关闭*/
+            , getOut: function () {
+                if (vm.canGetOut && vm.toggle) {
+                    vm.left = vm.sx
+                    vm.top = vm.sy
+                    vm.transform = "scale(0)"
+                    window.setTimeout(function () {
+                        vm.toggle = false;
+                    }, 250)
+                    document.body.style.overflowY = "auto"
+
+                }
+                else{
+                    console.log("canGetOut:"+vm.canGetOut+";toggle:"+vm.toggle)
+                }
+
+//
+            },
+            mustOut:function(){
+                if(vm.toggle){
+                    vm.left = vm.sx
+                    vm.top = vm.sy
+                    vm.transform = "scale(0)"
+                    window.setTimeout(function () {
+                        vm.toggle = false;
+                    }, 250)
+                    document.body.style.overflowY = "auto"
+                }
             }
 
-        }
 
-    })
-});
 
+        })
+        //传入配置，传入方法就是把option里面的属性和刚才创建的VM里面的属性搅拌起来
+        avalon.mix(vm, options)
+
+        //最后把创建好的VM赋值给当前域下面的以VM的ID为名称的对象里面去，我们就能在当前域调用了
+        return this[objId] = vm
+    }
+    //这是给默认配置的地方，在这里暂时还用不上
+    widget.defaults = {}
+
+    //传说一定要这样,不过我注释了也没有什么异常
+    return avalon
+})
