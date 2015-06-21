@@ -29,10 +29,10 @@ email：<mooshroom@tansuyun.cn>
 这样就创建了一个弹出框组件了，弹出框组件的调用方法如下：
 ```javascript
 // 开启弹出框
-modal.getIn();
+modal1.getIn();
 
 // 关闭弹出框
-modal.getOut();
+modal1.getOut();
 ```
 ---
 
