@@ -8,11 +8,11 @@ require(["mmRouter", "mmRequest", "nav"], function () {
         avalon.router.get('/' + n, function () {
 //            modal.getOutByRouter()
             var uiURL = './ui/' + n + "/";
-            layout.url = uiURL + "demo.html"
-            getDoc(uiURL + "README.md")
+            layout.url = uiURL + "demo.html";
+            getDoc(uiURL + "README.md");
             require(["../../ui/" + n + "/" + n + '.js'], function () {
-                console.log(n + "加载成功")
-            })
+                console.log(n + "加载成功");
+            });
         });
     }
 
@@ -23,12 +23,12 @@ require(["mmRouter", "mmRequest", "nav"], function () {
                 type: "get",
                 url: url,
                 success: function (res) {
-                    layout.doc = marked(res)
+                    layout.doc = marked(res);
 //                        console.log(res)
                     prettyPrint();
                 }
-            })
-        })
+            });
+        });
     }
 
 
@@ -36,11 +36,11 @@ require(["mmRouter", "mmRequest", "nav"], function () {
     avalon.router.get('/', function () {
         //调用门禁
 //        modal.getOutByRouter()
-        layout.url = "./body/none.html"
+        layout.url = "./body/none.html";
         //加载所依赖的VM
         require(["home"], function () {
-            getDoc("./README.md")
-            avalon.scan()
+            getDoc("./README.md");
+            avalon.scan();
         })
     });
 
@@ -51,20 +51,19 @@ require(["mmRouter", "mmRequest", "nav"], function () {
         type: "get",
         url: "./ui.json",
         success: function (res) {
-            cache.go(res)
+            cache.go(res);
 
             //生成路由
             for (var i = 0; i < res.uiList.length; i++) {
-                var n = res.uiList[i].name
+                var n = res.uiList[i].name;
                 //构建路由
-                newRouter(n)
-                console.log(n)
+                newRouter(n);
+                console.log(n);
             }
             //开始监听路由
             avalon.history.start();
         }
-    })
-
+    });
 
     //开始监听
 
