@@ -61,7 +61,6 @@ define([
                         y: ev.clientY + document.body.scrollTop - document.body.clientTop
                     };
                 }
-
                 document.onmousemove = mouseMove;
             },
             $remove: function () {
