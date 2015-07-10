@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>uploader demo 概览</title>
-<script src="../avalon.js"></script>
-<link rel="stylesheet" href="../style/avalon.doc.css"/>
+
 <style>
 	ul{
 		margin: 0;
@@ -96,8 +89,8 @@
 
 	
 </style>
-</head>
-<body ms-controller="demo">
+
+<div ms-controller="demo">
 
 	<h2>概览</h2>
 	
@@ -156,7 +149,7 @@
 	</fieldset>
 
 	<script>
-		require(["uploader/avalon.uploader", "domReady!"], function(){
+		require(["../../ui/uploader/uploader", "domReady!"], function(){
 			var model = avalon.define({
 				$id: "demo",
 				$opts: {
@@ -182,5 +175,5 @@
 		});
 
 	</script>
-</body>
-</html>
+</div>
+

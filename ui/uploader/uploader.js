@@ -1,4 +1,10 @@
-define(["browser/avalon.browser", "text!./avalon.uploader.html", "mmRequest/mmRequest", "./swfobject/swfobject"], function(avalon, sourceHTML){
+define([
+    "../../ui/browser/browser",
+    "text!../../ui/uploader/uploader.html",
+    "mmRequest",
+    "../../ui/uploader/swfobject/swfobject"
+],
+    function(avalon, sourceHTML){
 
 	var widget = avalon.ui.uploader = function(element, data, vmodels){
 
@@ -247,7 +253,7 @@ define(["browser/avalon.browser", "text!./avalon.uploader.html", "mmRequest/mmRe
 				id: swfId
 			};
 			avalon.swfobject.embedSWF(
-				"swfobject/multiPicUpload.swf", 
+				"./ui/uploader/swfobject/multiPicUpload.swf",
 				"altContent", "100%", "100%", "10.0.0", 
 				"expressInstall.swf", 
 				flashvars, params, attributes
