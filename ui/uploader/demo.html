@@ -7,7 +7,38 @@
         require(['../../ui/uploader/uploader','../../ui/tip/tip'],function(){
             var demo=avalon.define({
                 $id:"demo",
-                $opt:{}
+                $opt:{
+                    conf: {
+                        pick: {
+                            id: '#filePicker',
+                            label: '点击选择图片'
+                        },
+                        formData: {
+                            uid: 123
+                        },
+                        dnd: '#dndArea',
+                        paste: '#uploader',
+                        swf: './ui/uploader/uploader.swf',
+                        chunked: false,
+                        chunkSize: 512 * 1024,
+                        server: apiURL + '50&tsy=' + cache.go("tsy"),
+
+                        //下面这个如果不注释就会影响整个上传工具
+//                                runtimeOrder: 'flash',
+
+                        accept: {
+                            title: 'Images',
+                            extensions: 'jpg,jpeg,bmp,png',
+                            mimeTypes: 'image/*'
+                        },
+
+                        // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
+                        disableGlobalDnd: true,
+                        fileNumLimit: 10,
+                        fileSizeLimit: 200 * 1024 * 1024,    // 200 M
+                        fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M
+                    }
+                }
             })
             avalon.scan()
         })

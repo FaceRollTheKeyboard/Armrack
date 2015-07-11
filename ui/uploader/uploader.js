@@ -59,7 +59,7 @@ define([
                 },
 
                 /********以下是正常的组件的各个属性********/
-
+                show:false,
                 //上传工具设置
                 conf: {
                     pick: {
@@ -279,6 +279,7 @@ define([
 
                             uploader.on('ready', function () {
 //                                window.uploader = uploader;
+                                vm.show=true
                             });
 
                             // 当有文件添加进来时执行，负责view的创建

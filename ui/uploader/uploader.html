@@ -2,7 +2,11 @@
     <div class="queueList">
         <div id="dndArea" class="placeholder">
             <div id="filePicker"></div>
-            <p>或将照片拖到这里，单次最多可选300张</p>
+            <p>
+                或将照片拖到这里,最多可选择
+                <span ms-if="show">{{conf.fileNumLimit}}</span>
+                张图片
+            </p>
         </div>
     </div>
     <div class="statusBar" style="display:none;">
