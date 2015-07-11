@@ -42,9 +42,21 @@ define([
                     ev = ev || window.event;
                     var mousePos = mouseCoords(ev);
 //alert(ev.pageX);
+                    //获取滚动高度
+                    var ST=0;
+                    if(document.documentElement&&document.documentElement.scrollTop)
+                    {
+                        ST=document.documentElement.scrollTop;
+                    }
+                    else if(document.body)
+                    {
+                        ST=document.body.scrollTop;
+                    }
+
+                    // 计算位置
                     if(!vm.toggle){
                         vm.left=vm.mx = mousePos.x;
-                        vm.top=vm.my = mousePos.y;
+                        vm.top=vm.my = mousePos.y-ST;
                     }
                     else{
                         vm.mx = mousePos.x;
