@@ -684,6 +684,7 @@ define([
 
                             $upload.addClass('state-' + state);
                             updateTotalProgress();
+                            vm.uploader=uploader
                         });
                     }, 100)
                 }
