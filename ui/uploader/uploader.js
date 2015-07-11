@@ -95,6 +95,10 @@ define([
                 //返回的图片
                 images:[],
 
+                //成功之后的额外回调
+                success:function(file,res){
+
+                },
                 //构建上传工具
                 build: function () {
                     setTimeout(function () {
@@ -620,6 +624,7 @@ define([
                                     //上传真成功
                                     $('#' + file.id).addClass('upload-state-done');
                                     vm.images.push(res.d[0])
+                                    vm.success(file,res)
                                 }
                                 else if(res.c==403){
                                     tip.off('上传完成', 1);
