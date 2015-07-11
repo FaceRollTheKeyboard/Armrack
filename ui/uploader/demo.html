@@ -1,21 +1,15 @@
-<div ms-controller="demoUploader">
-    <div ms-widget="uploader,uploader,$opt">
+<div ms-controller="demo">
+    <div ms-widget="uploader,uploader,$opt"></div>
 
-    </div>
 </div>
 <script>
-    avalon.ready(function () {
-        require(['../../ui/uploader/uploader'], function () {
-            var demoUploader = avalon.define({
-                $id: "demoUploader",
-                ready: function () {
-                },
-                $opt: {}
+    avalon.ready(function(){
+        require(['../../ui/uploader/uploader'],function(){
+            var demo=avalon.define({
+                $id:"demo",
+                $opt:{}
             })
             avalon.scan()
-
-
         })
-
     })
 </script>
