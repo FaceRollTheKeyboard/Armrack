@@ -11,7 +11,7 @@ define([
         '../../ui/uploader/webuploader'
     ],
     function (avalon, html) {
-        var widget = avalon.ui.tip = function (element, data, vmodels) {
+        var widget = avalon.ui.uploader = function (element, data, vmodels) {
             var options = data.uploaderOptions//取得配置
             var objId = data.uploaderId//声明新生成组件的ID
             /**

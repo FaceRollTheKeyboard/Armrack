@@ -152,7 +152,7 @@ define("uploader",function(){
                 swf: '../js/Uploader.swf',
                 chunked: false,
                 chunkSize: 512 * 1024,
-                server:  apiURL + '50&tsy='+publish.tsy,
+                server:  apiURL + '50&tsy='+cache.go("tsy"),
                 // runtimeOrder: 'flash',
 
                 accept: {
@@ -545,12 +545,14 @@ define("uploader",function(){
             });
             uploader.on( 'uploadSuccess', function( file ,response) {
                 $( '#'+file.id ).addClass('upload-state-done');
+
+                //todo 这里编写上传回调函数
                 if(response.d[0].ID==0){
                     tip.on('上传图片失败...',0);
                 }
                 else{
-                    publish.picIds.push(response.d[0].ID);
-                    publish.images.push(response.d[0]);
+//                    publish.picIds.push(response.d[0].ID);
+//                    publish.images.push(response.d[0]);
                 }
             });
             uploader.onError = function( code ) {

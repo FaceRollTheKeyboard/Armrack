@@ -99,7 +99,12 @@
         makeExport = function( dollar ) {
             root.__dollar = dollar;
 
+
             // exports every module.
+            //这里是为了将WebUploader暴露在当前作用域下，所打的补丁，否则使用avalon的amd加载后将无法调用WebUploader
+            root.WebUploader=exportsTo( factory( root, _define, _require ) );
+
+
             return exportsTo( factory( root, _define, _require ) );
         },
 
