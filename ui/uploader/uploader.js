@@ -614,15 +614,13 @@ define([
                                 }
                             });
                             uploader.on('uploadSuccess', function (file, res) {
-                                vm.success(file, res)
-
                                 //todo 这里编写上传回调函数
                                 if(res.c==200){
                                     //上传真成功
                                     $('#' + file.id).addClass('upload-state-done');
                                     vm.images.push(res.d[0])
                                 }
-                                else if(res.r==403){
+                                else if(res.c==403){
                                     tip.off('上传完成', 1);
                                     alert("您未登录，或登录已经失效，请登录后再试")
                                     location.reload()
