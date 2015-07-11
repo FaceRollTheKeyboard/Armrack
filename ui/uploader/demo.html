@@ -1,10 +1,10 @@
 <div ms-controller="demo">
     <div ms-widget="uploader,uploader,$opt"></div>
-
+    <div ms-widget="tip,tip,$opt"></div>
 </div>
 <script>
     avalon.ready(function(){
-        require(['../../ui/uploader/uploader'],function(){
+        require(['../../ui/uploader/uploader','../../ui/tip/tip'],function(){
             var demo=avalon.define({
                 $id:"demo",
                 $opt:{}

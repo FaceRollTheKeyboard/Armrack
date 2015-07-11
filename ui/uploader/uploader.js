@@ -1,7 +1,7 @@
 /**
  * Created by mooshroom on 2015-07-10.
- * 版本：-
- * -
+ * 版本：v0.0.1
+ * 初步完成，由于没有很好的封装，所以现在一个页面上只能用一次
  */
 define([
         //引入所依赖的文件
@@ -91,6 +91,10 @@ define([
                     fileSizeLimit: 200 * 1024 * 1024,    // 200 M
                     fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M
                 },
+
+                //返回的图片
+                images:[],
+
                 //构建上传工具
                 build: function () {
                     setTimeout(function () {
@@ -542,9 +546,9 @@ define([
                                     case 'finish':
                                         stats = uploader.getStats();
                                         if (stats.successNum) {
-                                            tip.on('上传成功', 1);
+                                            tip.on('上传完成', 1);
                                             setTimeout(function () {
-                                                tip.off('上传成功', 1);
+                                                tip.off('上传完成', 1);
                                             }, 3000);
                                         } else {
                                             // 没有成功的图片，重设
@@ -609,17 +613,35 @@ define([
 
                                 }
                             });
-                            uploader.on('uploadSuccess', function (file, response) {
-                                $('#' + file.id).addClass('upload-state-done');
+                            uploader.on('uploadSuccess', function (file, res) {
+                                vm.success(file, res)
 
                                 //todo 这里编写上传回调函数
-                                if (response.d[0].ID == 0) {
-                                    tip.on('上传图片失败...', 0);
+                                if(res.c==200){
+                                    //上传真成功
+                                    $('#' + file.id).addClass('upload-state-done');
+                                    vm.images.push(res.d[0])
                                 }
-                                else {
-//                    publish.picIds.push(response.d[0].ID);
-//                    publish.images.push(response.d[0]);
+                                else if(res.r==403){
+                                    tip.off('上传完成', 1);
+                                    alert("您未登录，或登录已经失效，请登录后再试")
+                                    location.reload()
                                 }
+                                else{
+                                    var err=res.c+':'+res.m
+
+                                    tip.on("上传失败\r\n"+err);
+                                    setTimeout(function () {
+                                        tip.off('上传完成', 1);
+                                    }, 200);
+                                    console.log(err)
+
+                                    //从队列中去掉不成功的图片
+                                    uploader.removeFile(file,true);
+
+
+                                }
+
                             });
                             uploader.onError = function (code) {
                                 if (code == "F_DUPLICATE") {
