@@ -12,7 +12,7 @@ define([
         "../../ui/MDEditor/prettify",
         '../../ui/modal/modal'
     ],
-    function (avalon,jquery, html) {
+    function (avalon, jquery, html) {
         var widget = avalon.ui.MDEditor = function (element, data, vmodels) {
             var options = data.MDEditorOptions//取得配置
             var objId = data.MDEditorId//声明新生成组件的ID
@@ -32,18 +32,18 @@ define([
 
 
 //                    require(['../../ui/modal/modal'],function(){
-                        //扫描新添加进来的DOM节点，一定要传第二个参数，否则有的东西扫描不到
-                        avalon.scan(element, [vm].concat(vmodels))
+                    //扫描新添加进来的DOM节点，一定要传第二个参数，否则有的东西扫描不到
+                    avalon.scan(element, [vm].concat(vmodels))
 
-                        /*
-                         * 组件的$init方法里面,
-                         * 在扫描后最好再调用一个onInit回调,传入当前组件的 vmodel, options, vmodels, this指向当前元素
-                         * 这样用户就不需要定义组件的$id了
-                         * (据说是这样，然而并没有感觉到什么卵用)
-                         */
-                        if (typeof vm.onInit === "function") {
-                            vm.onInit.call(element, vm, options, vmodels)
-                        }
+                    /*
+                     * 组件的$init方法里面,
+                     * 在扫描后最好再调用一个onInit回调,传入当前组件的 vmodel, options, vmodels, this指向当前元素
+                     * 这样用户就不需要定义组件的$id了
+                     * (据说是这样，然而并没有感觉到什么卵用)
+                     */
+                    if (typeof vm.onInit === "function") {
+                        vm.onInit.call(element, vm, options, vmodels)
+                    }
 //                    })
 
 
@@ -64,11 +64,9 @@ define([
                     vm.toBoth();//切换为实时预览模式
                     vm.autoHeight();//自适应高度
                     vm.doubleScroll();//实时预览双滚动
-                    setTimeout(function(){
+                    setTimeout(function () {
                         vm.getLoaclDoc()
-                    },300)
-
-
+                    }, 300)
 
 
                 },
@@ -80,67 +78,71 @@ define([
                 },
 
                 //并不知道有什么用，但是规范上面说要有这个方法（囧）
-                onInit:function(){
+                onInit: function () {
 
                 },
 
                 /********以下是正常的组件的各个属性********/
                 now: "1",
-                    md:'',
-                html:"",
-                $opt:{},
+                md: '',
+                html: "",
+                loadLocaDoc: true,
+                $opt: {},
                 //本地缓存
-                isHTML5:false,
-                getLoaclDoc:function(){
-                    //检测是否支持html5web存储
-                    if (typeof(Storage) !== "undefined") {
-                        vm.isHTML5 = true;
+                isHTML5: false,
+                getLoaclDoc: function () {
+                    if (vm.loadLocaDoc) {
+                        //检测是否支持html5web存储
+                        if (typeof(Storage) !== "undefined") {
+                            vm.isHTML5 = true;
 
-                        //查找存储中的lastMD，判断是否为第一次使用
-                        var isFirst = true;
-                        for (var i = 0; i < window.localStorage.length; i++) {
-                            if (window.localStorage.key(i) == "lastMD") {
-                                isFirst = false;
-                                break
-                            }
-                        }
-
-                        //加载上一次的文档
-
-
-                        if (isFirst) {
-                            avalon.ajax({
-                                url: "./README.md",
-                                type: "get",
-                                success: function (data) {
-                                    vm.md = data;
-                                    vm.trs();
+                            //查找存储中的lastMD，判断是否为第一次使用
+                            var isFirst = true;
+                            for (var i = 0; i < window.localStorage.length; i++) {
+                                if (window.localStorage.key(i) == "lastMD") {
+                                    isFirst = false;
+                                    break
                                 }
+                            }
 
-                            })
+                            //加载上一次的文档
+
+
+                            if (isFirst) {
+                                avalon.ajax({
+                                    url: "./README.md",
+                                    type: "get",
+                                    success: function (data) {
+                                        vm.md = data;
+                                        vm.trs();
+                                    }
+
+                                })
+                            }
+                            else {
+                                vm.md = window.localStorage.getItem("lastMD");
+                                if (vm.md !== "") {
+                                    vm.trs();
+                                    tip.on("成功加载上一次的文档！", 1, 3000)
+                                }
+                            }
+
+
                         }
                         else {
-                            vm.md = window.localStorage.getItem("lastMD");
-                            if (vm.md !== "") {
-                                vm.trs();
-                                tip.on("成功加载上一次的文档！", 1, 3000)
-                            }
+                            tip.on("您老的浏览器老得不行了，无法为您开启文档保护", 0, 6000)// Sorry! No web storage support..
+                            vm.isHTML5 = false;
                         }
-
-
                     }
-                    else {
-                        tip.on("您老的浏览器老得不行了，无法为您开启文档保护", 0, 6000)// Sorry! No web storage support..
-                        vm.isHTML5 = false;
-                    }
+
                 },
 
                 //文档编译
-                trs:function(){
+                trs: function () {
 //                    var result=marked(vm.md);
 //                    document.getElementById('doc-show').innerHTML = result;
 //                    document.getElementById('read-only').innerHTML = result;
-                    vm.html=marked(vm.md)+'<br/><br/><br/><br/><br/><br/>'
+                    vm.html = marked(vm.md) + '<br/><br/><br/><br/><br/><br/>'
                     //执行本地缓存
                     if (vm.isHTML5 === true) {
                         window.localStorage.setItem("lastMD", vm.md)
@@ -351,7 +353,7 @@ define([
                 imgUrl: "",
                 img: function () {
 
-                    function imgIn(){
+                    function imgIn() {
                         //要插入
                         modalimg.mustOut()
                         if (vm.imgUrl == "") {
@@ -367,21 +369,20 @@ define([
 
                         vm.imgUrl = "";
                     }
-                    if(vm.imgUrl==""){
+
+                    if (vm.imgUrl == "") {
                         //没有 图片地址
-                        var a=confirm("您还没有输入或上传图片，确定插入么？")
-                        if(a){
+                        var a = confirm("您还没有输入或上传图片，确定插入么？")
+                        if (a) {
                             imgIn()
                         }
-                        else{
+                        else {
                             //不要插入
                         }
-                    }else{
+                    } else {
                         //已有图片地址
                         imgIn()
                     }
-
-
 
 
                 },
@@ -478,30 +479,148 @@ define([
                 },
 
 //        //保存文件
-//        save:function(){
-//
-//        }
+                Base64: {
+                    _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+                    encode: function (input) {
+                        var output = "";
+                        var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+                        var i = 0;
+                        input = vm.Base64._utf8_encode(input);
+                        while (i < input.length) {
+                            chr1 = input.charCodeAt(i++);
+                            chr2 = input.charCodeAt(i++);
+                            chr3 = input.charCodeAt(i++);
+                            enc1 = chr1 >> 2;
+                            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+                            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+                            enc4 = chr3 & 63;
+                            if (isNaN(chr2)) {
+                                enc3 = enc4 = 64;
+                            } else if (isNaN(chr3)) {
+                                enc4 = 64;
+                            }
+                            output = output +
+                                vm.Base64._keyStr.charAt(enc1) + vm.Base64._keyStr.charAt(enc2) +
+                                vm.Base64._keyStr.charAt(enc3) + vm.Base64._keyStr.charAt(enc4);
+                        }
+                        return output;
+                    },
+                    decode: function (input) {
+                        var output = "";
+                        var chr1, chr2, chr3;
+                        var enc1, enc2, enc3, enc4;
+                        var i = 0;
+                        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+                        while (i < input.length) {
+                            enc1 = vm.Base64._keyStr.indexOf(input.charAt(i++));
+                            enc2 = vm.Base64._keyStr.indexOf(input.charAt(i++));
+                            enc3 = vm.Base64._keyStr.indexOf(input.charAt(i++));
+                            enc4 = vm.Base64._keyStr.indexOf(input.charAt(i++));
+                            chr1 = (enc1 << 2) | (enc2 >> 4);
+                            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+                            chr3 = ((enc3 & 3) << 6) | enc4;
+                            output = output + String.fromCharCode(chr1);
+                            if (enc3 != 64) {
+                                output = output + String.fromCharCode(chr2);
+                            }
+                            if (enc4 != 64) {
+                                output = output + String.fromCharCode(chr3);
+                            }
+                        }
+                        output = vm.Base64._utf8_decode(output);
+                        return output;
+                    },
+                    _utf8_encode: function (string) {
+                        string = string.replace(/\r\n/g, "\n");
+                        var utftext = "";
+                        for (var n = 0; n < string.length; n++) {
+                            var c = string.charCodeAt(n);
+                            if (c < 128) {
+                                utftext += String.fromCharCode(c);
+                            }
+                            else if ((c > 127) && (c < 2048)) {
+                                utftext += String.fromCharCode((c >> 6) | 192);
+                                utftext += String.fromCharCode((c & 63) | 128);
+                            }
+                            else {
+                                utftext += String.fromCharCode((c >> 12) | 224);
+                                utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+                                utftext += String.fromCharCode((c & 63) | 128);
+                            }
+                        }
+                        return utftext;
+                    },
+                    _utf8_decode: function (utftext) {
+                        var string = "";
+                        var i = 0;
+                        var c = c1 = c2 = 0;
+                        while (i < utftext.length) {
+                            c = utftext.charCodeAt(i);
+                            if (c < 128) {
+                                string += String.fromCharCode(c);
+                                i++;
+                            }
+                            else if ((c > 191) && (c < 224)) {
+                                c2 = utftext.charCodeAt(i + 1);
+                                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                                i += 2;
+                            }
+                            else {
+                                c2 = utftext.charCodeAt(i + 1);
+                                c3 = utftext.charCodeAt(i + 2);
+                                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                                i += 3;
+                            }
+                        }
+                        return string;
+                    }
+                },
+                save: function () {
+                    if (/msie/i.test(navigator.userAgent)) {
+
+                    }
+                    else {
+                        var content = vm.md;
+                        this.setAttribute("href",
+                                "data:application/octet-stream;base64,"
+                                + vm.Base64.encode(content));
+                    }
+                },
+                saveFile: function () {
+                    if (/msie/i.test(navigator.userAgent)) {
+                        var path = prompt("输入保存路径和文件名", "D:\\" + "新建markdown文件.md");
+                        var content = vm.md;
+                        content = content.replace(/\n/g, "\r\n");
+                        var fso = new ActiveXObject("Scripting.FileSystemObject");
+                        var s = fso.CreateTextFile(path, true);
+                        s.WriteLine(content);
+                        s.Close();
+                    }
+                    else {
+
+                    }
+                },
 
                 //下拉菜单
-                dh:false,//插入标题下拉菜单
-                dl:false,//插入列表下拉菜单
-                dropdown:function(i){
-                    if(vm[i]){
-                        vm[i]=false
-                    }else{
-                        vm.dh=false
-                        vm.dl=false
-                        vm[i]=true
+                dh: false,//插入标题下拉菜单
+                dl: false,//插入列表下拉菜单
+                dropdown: function (i) {
+                    if (vm[i]) {
+                        vm[i] = false
+                    } else {
+                        vm.dh = false
+                        vm.dl = false
+                        vm[i] = true
                     }
                 },
 
                 //构建图片上传工具
-                getUploader:function(){
-                    require(['../../ui/uploader/uploader'],function(){
-                        setTimeout(function(){
-                            var demo=avalon.define({
-                                $id:"demo",
-                                $opt:{
+                getUploader: function () {
+                    require(['../../ui/uploader/uploader'], function () {
+                        setTimeout(function () {
+                            var demo = avalon.define({
+                                $id: "demo",
+                                $opt: {
                                     conf: {
                                         pick: {
                                             id: '#filePicker',
@@ -532,16 +651,15 @@ define([
                                         fileSizeLimit: 200 * 1024 * 1024,    // 200 M
                                         fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M
                                     },
-                                    success:function(file,res){
-                                        vm.imgUrl=res.d[0].ImgUrl
+                                    success: function (file, res) {
+                                        vm.imgUrl = res.d[0].ImgUrl
                                         vm.img()
-                                        uploader.uploader.removeFile(file,true);
+                                        uploader.uploader.removeFile(file, true);
                                     }
                                 }
                             })
                             avalon.scan()
-                        },500)
-
+                        }, 500)
 
 
                     })
