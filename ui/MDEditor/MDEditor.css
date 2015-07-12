@@ -144,7 +144,9 @@
 
 
 }
-
+#doc-show img,#read-only img{
+    max-width: 100%;
+}
 
 
 .tool{

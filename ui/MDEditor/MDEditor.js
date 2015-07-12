@@ -618,8 +618,8 @@ define([
                 getUploader: function () {
                     require(['../../ui/uploader/uploader'], function () {
                         setTimeout(function () {
-                            var demo = avalon.define({
-                                $id: "demo",
+                            var uploaderBox = avalon.define({
+                                $id: "uploaderBox",
                                 $opt: {
                                     conf: {
                                         pick: {
