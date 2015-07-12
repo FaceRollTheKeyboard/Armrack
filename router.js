@@ -18,7 +18,7 @@ require(["mmRouter", "mmRequest", "nav"], function () {
 
     //获取文档
     function getDoc(url) {
-        require(["marked", "prettify", 'css!MDcss'], function () {
+        require(["marked", "prettify", 'css!../../ui/MDEditor/MDEditor'], function () {
             avalon.ajax({
                 type: "get",
                 url: url,

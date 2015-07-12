@@ -1,0 +1,16 @@
+<div ms-controller="demoMDEditor">
+    <div ms-widget="MDEditor,MDEditor,$opt"></div>
+</div>
+<script>
+    avalon.ready(function(){
+        require(['../../ui/MDEditor/MDEditor'],function(){
+            var demoMDEditor=avalon.define({
+                $id:"demoMDEditor",
+                ready:function(){},
+                $opt:{}
+            })
+            avalon.scan()
+        })
+
+    })
+</script>

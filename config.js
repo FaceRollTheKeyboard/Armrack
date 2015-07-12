@@ -6,13 +6,13 @@
 require.config({
     paths: {
         //这里只定义插件以及灵魂的外部入口，插件内部所依赖的在插件内部的ready函数内定义
-        MDEditor:'../../plugins/MDEditor/MDEditor.js',
-        modal:'../../plugins/modal/modal.js',
-        stb:'../../plugins/strawberry/stb.js',
+//        MDEditor:'../../ui/MDEditor/MDEditor.js',
+//        modal:'../../plugins/modal/modal.js',
+//        stb:'../../plugins/strawberry/stb.js',
 
-        marked:"../../plugins/MDEditor/markdown.js",
-        MDcss:"../../plugins/MDEditor/MDEditor.css",
-        prettify:"../../plugins/MDEditor/prettify.js",
+        marked:"../../ui/MDEditor/markdown.js",
+//        MDcss:"../../plugins/MDEditor/MDEditor.css",
+        prettify:"../../ui/MDEditor/prettify.js",
 
         //soul
         home:"../../soul/home.js",

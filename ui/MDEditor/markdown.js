@@ -744,7 +744,7 @@ define('marked',function(){
             if (title) {
                 out += ' title="' + title + '"';
             }
-            out += '>' + text + '</a>';
+            out += 'target="_blank">' + text + '</a>';
             return out;
         };
         Renderer.prototype.image = function (href, title, text) {

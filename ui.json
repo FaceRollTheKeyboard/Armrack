@@ -15,7 +15,12 @@
         {
           "name":"bowser",
             "info":"浏览器检测组件"
+        },
+        {
+            "name":"MDEditor",
+            "info":"md编辑器组件"
         }
+
     ]
 
 }
