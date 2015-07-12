@@ -497,7 +497,7 @@ define([
 
                 //构建图片上传工具
                 getUploader:function(){
-                    require(['../../ui/uploader/uploader','../../ui/tip/tip'],function(){
+                    require(['../../ui/uploader/uploader'],function(){
                         setTimeout(function(){
                             var demo=avalon.define({
                                 $id:"demo",
@@ -533,8 +533,8 @@ define([
                                         fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M
                                     },
                                     success:function(file,res){
-                                        MDEditor.imgUrl=res.d[0].ImgUrl
-                                        MDEditor.img()
+                                        vm.imgUrl=res.d[0].ImgUrl
+                                        vm.img()
                                         uploader.uploader.removeFile(file,true);
                                     }
                                 }

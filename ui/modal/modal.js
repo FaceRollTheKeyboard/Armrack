@@ -37,43 +37,7 @@ define([
                     vm.onInit.call(element, vm, options, vmodels)
                 }
 
-                /***********获取鼠标位置****************/
-                function mouseMove(ev) {
-                    ev = ev || window.event;
-                    var mousePos = mouseCoords(ev);
-//alert(ev.pageX);
-                    //获取滚动高度
-                    var ST=0;
-                    if(document.documentElement&&document.documentElement.scrollTop)
-                    {
-                        ST=document.documentElement.scrollTop;
-                    }
-                    else if(document.body)
-                    {
-                        ST=document.body.scrollTop;
-                    }
 
-                    // 计算位置
-                    if(!vm.toggle){
-                        vm.left=vm.mx = mousePos.x;
-                        vm.top=vm.my = mousePos.y-ST;
-                    }
-                    else{
-                        vm.mx = mousePos.x;
-                        vm.my = mousePos.y;
-                    }
-                }
-
-                function mouseCoords(ev) {
-                    if (ev.pageX || ev.pageY) {
-                        return {x: ev.pageX, y: ev.pageY};
-                    }
-                    return {
-                        x: ev.clientX + document.body.scrollLeft - document.body.clientLeft,
-                        y: ev.clientY + document.body.scrollTop - document.body.clientTop
-                    };
-                }
-                document.onmousemove = mouseMove;
             },
             $remove: function () {
 //                element.innerHTML = ""
@@ -93,6 +57,45 @@ define([
 
             sx: 0,//弹框开始位置X坐标
             sy: 0,//弹框开始位置Y坐标
+            //鼠标位置
+            getMouse:function(ev){
+
+                ev = ev || window.event;
+                var mousePos = mouseCoords(ev);
+//alert(ev.pageX);
+                //获取滚动高度
+                var ST=0;
+                if(document.documentElement&&document.documentElement.scrollTop)
+                {
+                    ST=document.documentElement.scrollTop;
+                }
+                else if(document.body)
+                {
+                    ST=document.body.scrollTop;
+                }
+
+                // 计算位置
+                if(!vm.toggle){
+                    vm.left=vm.mx = mousePos.x;
+                    vm.top=vm.my = mousePos.y-ST;
+                }
+                else{
+                    vm.mx = mousePos.x;
+                    vm.my = mousePos.y;
+                }
+
+                //抓取位置的函数
+                function mouseCoords(ev) {
+                    if (ev.pageX || ev.pageY) {
+                        return {x: ev.pageX, y: ev.pageY};
+                    }
+                    return {
+                        x: ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+                        y: ev.clientY + document.body.scrollTop - document.body.clientTop
+                    };
+                }
+            },
+
 
             top: 0,
             left: 0,
@@ -101,9 +104,9 @@ define([
 
             times: 0
             //*模态框弹出*/
-            , getIn: function () {
+            , getIn: function (ev) {
 
-
+                vm.getMouse(ev)
 
 
                 vm.sx = vm.left
