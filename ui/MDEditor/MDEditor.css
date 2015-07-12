@@ -36,8 +36,8 @@
     height: 50px;
     display: block;
 
-    margin-bottom: 5px
-
+    margin-bottom: 5px;
+background-color: #ffffff;
 }
 .md-nav:after{
     clear: both
