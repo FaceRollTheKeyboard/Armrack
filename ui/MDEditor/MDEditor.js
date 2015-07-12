@@ -29,19 +29,21 @@ define([
                     //填充DOM结构
                     element.innerHTML = html
 
-                    //扫描新添加进来的DOM节点，一定要传第二个参数，否则有的东西扫描不到
-                    avalon.scan(element, [vm].concat(vmodels))
 
-                    /*
-                     * 组件的$init方法里面,
-                     * 在扫描后最好再调用一个onInit回调,传入当前组件的 vmodel, options, vmodels, this指向当前元素
-                     * 这样用户就不需要定义组件的$id了
-                     * (据说是这样，然而并没有感觉到什么卵用)
-                     */
-                    if (typeof vm.onInit === "function") {
-                        vm.onInit.call(element, vm, options, vmodels)
-                    }
+                    require(['../../ui/modal/modal'],function(){
+                        //扫描新添加进来的DOM节点，一定要传第二个参数，否则有的东西扫描不到
+                        avalon.scan(element, [vm].concat(vmodels))
 
+                        /*
+                         * 组件的$init方法里面,
+                         * 在扫描后最好再调用一个onInit回调,传入当前组件的 vmodel, options, vmodels, this指向当前元素
+                         * 这样用户就不需要定义组件的$id了
+                         * (据说是这样，然而并没有感觉到什么卵用)
+                         */
+                        if (typeof vm.onInit === "function") {
+                            vm.onInit.call(element, vm, options, vmodels)
+                        }
+                    })
 
 
                     marked.setOptions({
@@ -64,6 +66,9 @@ define([
                     setTimeout(function(){
                         vm.getLoaclDoc()
                     },300)
+
+
+
 
                 },
 
@@ -394,6 +399,7 @@ define([
                     else {
                         vm.insert("\r\n# ", "\r\n", 3, 0)
                     }
+
                 },
                 //插入标题h2
                 h2: function () {
@@ -466,12 +472,77 @@ define([
 
                         tip.on("成功载入！最后更新日期:" + resultFile.lastModifiedDate, 1, 5000)
                     }
-                }
+                },
 
 //        //保存文件
 //        save:function(){
 //
 //        }
+
+                //下拉菜单
+                dh:false,//插入标题下拉菜单
+                dl:false,//插入列表下拉菜单
+                dropdown:function(i){
+                    if(vm[i]){
+                        vm[i]=false
+                    }else{
+                        vm.dh=false
+                        vm.dl=false
+                        vm[i]=true
+                    }
+                },
+
+                //构建图片上传工具
+                getUploader:function(){
+                    require(['../../ui/uploader/uploader','../../ui/tip/tip'],function(){
+                        setTimeout(function(){
+                            var demo=avalon.define({
+                                $id:"demo",
+                                $opt:{
+                                    conf: {
+                                        pick: {
+                                            id: '#filePicker',
+                                            label: '点击选择图片'
+                                        },
+                                        formData: {
+                                            uid: 123
+                                        },
+                                        dnd: '#dndArea',
+                                        paste: '#uploader',
+                                        swf: './ui/uploader/uploader.swf',
+                                        chunked: false,
+                                        chunkSize: 512 * 1024,
+                                        server: apiURL + '50&tsy=' + cache.go("tsy"),
+
+                                        //下面这个如果不注释就会影响整个上传工具
+//                                runtimeOrder: 'flash',
+
+                                        accept: {
+                                            title: 'Images',
+                                            extensions: 'jpg,jpeg,bmp,png',
+                                            mimeTypes: 'image/*'
+                                        },
+
+                                        // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
+                                        disableGlobalDnd: true,
+                                        fileNumLimit: 1,
+                                        fileSizeLimit: 200 * 1024 * 1024,    // 200 M
+                                        fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M
+                                    },
+                                    success:function(file,res){
+                                        MDEditor.imgUrl=res.d[0].ImgUrl
+                                        MDEditor.img()
+                                        uploader.uploader.removeFile(file,true);
+                                    }
+                                }
+                            })
+                            avalon.scan()
+                        },500)
+
+
+
+                    })
+                }
 
                 /********以上是正常的组件的各个属性********/
             })

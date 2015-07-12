@@ -54,7 +54,8 @@
     z-index: 99999999;
     /*opacity: 0.1;*/
     /*height: 100%;*/
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .modal > div {

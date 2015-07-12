@@ -9,26 +9,26 @@
                 </a>
             </li>
             <li>
-                <!--<a  title="保存文件" class="tool-item" id="save">-->
-                    <!--<i class="icon-save"></i>-->
-                <!--</a>-->
+                <a  title="保存文件" class="tool-item" id="save">
+                    <i class="icon-save"></i>
+                </a>
             </li>
             <li>
                 <a>|</a>
             </li>
             <li class="dropdown">
-                <a  title="标题" href="" class="dropdown-toggle tool-item spirit" data-toggle="dropdown" role="button" aria-expanded="false">
+
+                <ul class="md-dropdown-menu" ms-if="dh" ms-mouseleave="dropdown('dh')">
+                    <li><a title=""  class="tool-item" ms-click="h1"  ms-click-a="dropdown('dh')">标题1</a></li>
+                    <li><a title=""  class="tool-item" ms-click="h2" ms-click-a="dropdown('dh')">标题2</a></li>
+                    <li><a title="" class="tool-item" ms-click="h3" ms-click-a="dropdown('dh')">标题3</a></li>
+                    <li><a title="" class="tool-item" ms-click="h4" ms-click-a="dropdown('dh')">标题4</a></li>
+                    <li><a title="" class="tool-item" ms-click="h5" ms-click-a="dropdown('dh')">标题5</a></li>
+                </ul>
+                <a  title="标题"  class=" tool-item spirit" ms-click="dropdown('dh')">
                     <i class="icon-th-list"></i>
                     <span class="caret"></span>
                 </a>
-                <!--<ul class="dropdown-menu" role="menu">-->
-                    <!--<li><a title=""  class="tool-item" ms-click="h1">标题1</a></li>-->
-                    <!--<li><a title=""  class="tool-item" ms-click="h2">标题2</a></li>-->
-                    <!--<li><a title="" class="tool-item" ms-click="h3">标题3</a></li>-->
-                    <!--<li><a title="" class="tool-item" ms-click="h4">标题4</a></li>-->
-                    <!--<li><a title="" class="tool-item" ms-click="h5">标题5</a></li>-->
-                <!--</ul>-->
-
             </li>
             <li>
                 <a  title="粗体" class="tool-item spirit" ms-click="bold">
@@ -59,21 +59,21 @@
                 </a>
             </li>
             <li>
-                <a title="图片" class="tool-item spirit" onclick="modalimg.getIn();getUploader()">
+                <a title="图片" class="tool-item spirit" onclick="modalimg.getIn();" ms-click="getUploader">
                     <i class="icon-picture"></i>
                 </a>
             </li>
             <li class="dropdown">
-                <a title="列表" href="" class="dropdown-toggle tool-item spirit" data-toggle="dropdown" role="button" aria-expanded="false">
+
+                <ul class="md-dropdown-menu" ms-if="dl" ms-mouseleave="dropdown('dl')">
+                    <li><a title="" class="tool-item" ms-click="ol" ms-click-a="dropdown('dl')">有序列表</a></li>
+                    <li><a title="" class="tool-item" ms-click="ul" ms-click-a="dropdown('dl')">无序列表</a></li>
+
+                </ul>
+                <a title="列表"  class=" tool-item spirit" ms-click-a="dropdown('dl')">
                     <i class="icon-list-ol"></i>
-                     <span class="caret"></span>
+                    <span class="caret"></span>
                 </a>
-                <!--<ul class="dropdown-menu" role="menu">-->
-                    <!--<li><a title="" class="tool-item" ms-click="ol">有序列表</a></li>-->
-                    <!--<li><a title="" class="tool-item" ms-click="ul">无序列表</a></li>-->
-
-                <!--</ul>-->
-
             </li>
             <li>
                 <a title="表格" class="tool-item spirit" ms-click="table">
@@ -113,130 +113,76 @@
             </li>
         </ul>
     </div>
-    <!--&lt;!&ndash;模态框&ndash;&gt;-->
-    <!--&lt;!&ndash;打开文件模态框&ndash;&gt;-->
-    <!--<div ms-widget="modal,modalfile,$opt">-->
-        <!--<div class="modal-dialog">-->
-            <!--<div class="modal-content">-->
-                <!--<div class="modal-header">-->
-                    <!--<button type="button" class="close" onclick="modalfile.mustOut()"><span aria-hidden="true">&times;</span></button>-->
-                    <!--<h4 class="modal-title" >打开本地文件</h4>-->
-                <!--</div>-->
-                <!--<div class="modal-body">-->
-                    <!--<br/>-->
-                    <!--<input type="file" class="form-control" id="file"/>-->
-                    <!--<br/>-->
-                <!--</div>-->
-                <!--<div class="modal-footer">-->
-                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>-->
-                    <!--<button type="button" class="btn btn-primary" ms-click="open">确认</button>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+    <!--模态框-->
+    <!--打开文件模态框-->
+    <div ms-widget="modal,modalfile">
+        <div class="modal-dialog md-modal" style="width: 750px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="modalfile.mustOut()"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" >打开本地文件</h4>
+                </div>
+                <div class="modal-body">
+                    <br/>
+                    <input type="file" class="form-control" id="file"/>
+                    <br/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" ms-click="open">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!--&lt;!&ndash;插入链接模态框&ndash;&gt;-->
-    <!--<div ms-widget="modal,modallink,$opt">-->
-        <!--<div class="modal-dialog">-->
-            <!--<div class="modal-content">-->
-                <!--<div class="modal-header">-->
-                    <!--<button type="button" class="close" onclick="modallink.mustOut()" ><span aria-hidden="true">&times;</span></button>-->
-                    <!--<h4 class="modal-title" >插入连接</h4>-->
-                <!--</div>-->
-                <!--<div class="modal-body">-->
-                    <!--请输入连接地址：<br/>-->
-                    <!--<input type="text" class="form-control" ms-duplex="link"/>-->
-                <!--</div>-->
-                <!--<div class="modal-footer">-->
-                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>-->
-                    <!--<button type="button" class="btn btn-primary" ms-click="links">确认</button>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+    <!--插入链接模态框-->
+    <div ms-widget="modal,modallink,$opt">
+        <div class="modal-dialog md-modal" style="width: 750px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="modallink.mustOut()" ><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" >插入连接</h4>
+                </div>
+                <div class="modal-body">
+                    请输入连接地址：<br/>
+                    <input type="text" class="form-control" ms-duplex="link"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" ms-click="links">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!--&lt;!&ndash;插入图片模态框&ndash;&gt;-->
-    <!--<div ms-widget="modal,modalimg,$opt" style="overflow-y: scroll">-->
-        <!--<div class="modal-dialog">-->
-            <!--<div class="modal-content">-->
-                <!--<div class="modal-header">-->
-                    <!--<button type="button" class="close" onclick="modalimg.mustOut()" ><span aria-hidden="true">&times;</span></button>-->
-                    <!--<h4 class="modal-title" >插入图片</h4>-->
-                <!--</div>-->
-                <!--<div class="modal-body">-->
-                    <!--图片URL地址：<br/>-->
-                    <!--<input type="text" class="form-control" ms-duplex="imgUrl"/>-->
-                    <!--<h4>-->
-                        <!--或者上传一张图片-->
-                    <!--</h4>-->
-                    <!--<div ms-controller="demo">-->
-                        <!--<div ms-widget="uploader,uploader,$opt"></div>-->
-                        <!--&lt;!&ndash;全局已有TIP插件，这里就不需要了&ndash;&gt;-->
-                        <!--&lt;!&ndash;<div ms-widget="tip,tip,$opt"></div>&ndash;&gt;-->
-                    <!--</div>-->
-                    <!--<script>-->
-                        <!--function getUploader(){-->
-                            <!--avalon.ready(function(){-->
-                                <!--require(['../../ui/uploader/uploader','../../ui/tip/tip'],function(){-->
-                                    <!--setTimeout(function(){-->
-                                        <!--var demo=avalon.define({-->
-                                            <!--$id:"demo",-->
-                                            <!--$opt:{-->
-                                                <!--conf: {-->
-                                                    <!--pick: {-->
-                                                        <!--id: '#filePicker',-->
-                                                        <!--label: '点击选择图片'-->
-                                                    <!--},-->
-                                                    <!--formData: {-->
-                                                        <!--uid: 123-->
-                                                    <!--},-->
-                                                    <!--dnd: '#dndArea',-->
-                                                    <!--paste: '#uploader',-->
-                                                    <!--swf: './ui/uploader/uploader.swf',-->
-                                                    <!--chunked: false,-->
-                                                    <!--chunkSize: 512 * 1024,-->
-                                                    <!--server: apiURL + '50&tsy=' + cache.go("tsy"),-->
+    <!--插入图片模态框-->
+    <div ms-widget="modal,modalimg,$opt" >
+        <div class="modal-dialog md-modal" style="width: 750px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="modalimg.mustOut()" ><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" >插入图片</h4>
+                </div>
+                <div class="modal-body">
+                    图片URL地址：<br/>
+                    <input type="text" class="form-control" ms-duplex="imgUrl"/>
+                    <h4>
+                        或者上传一张图片
+                    </h4>
+                    <div ms-controller="demo">
+                        <div ms-widget="uploader,uploader,$opt"></div>
+                        <!--全局已有TIP插件，这里就不需要了-->
+                        <!--<div ms-widget="tip,tip,$opt"></div>-->
+                    </div>
 
-                                                    <!--//下面这个如果不注释就会影响整个上传工具-->
-<!--//                                runtimeOrder: 'flash',-->
-
-                                                    <!--accept: {-->
-                                                        <!--title: 'Images',-->
-                                                        <!--extensions: 'jpg,jpeg,bmp,png',-->
-                                                        <!--mimeTypes: 'image/*'-->
-                                                    <!--},-->
-
-                                                    <!--// 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。-->
-                                                    <!--disableGlobalDnd: true,-->
-                                                    <!--fileNumLimit: 1,-->
-                                                    <!--fileSizeLimit: 200 * 1024 * 1024,    // 200 M-->
-                                                    <!--fileSingleSizeLimit: 50 * 1024 * 1024    // 50 M-->
-                                                <!--},-->
-                                                <!--success:function(file,res){-->
-                                                    <!--MDEditor.imgUrl=res.d[0].ImgUrl-->
-                                                    <!--MDEditor.img()-->
-                                                    <!--uploader.uploader.removeFile(file,true);-->
-                                                <!--}-->
-                                            <!--}-->
-                                        <!--})-->
-                                        <!--avalon.scan()-->
-                                    <!--},500)-->
-
-
-
-                                <!--})-->
-                            <!--})-->
-                        <!--}-->
-
-                    <!--</script>-->
-                <!--</div>-->
-                <!--<div class="modal-footer">-->
-                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>-->
-                    <!--<button type="button" class="btn btn-primary" ms-click="img">确认</button>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" ms-click="img">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <!--输入区-->
@@ -268,7 +214,5 @@
         </div>
     </div>
 </div>
-        <script>
-            MDEditor.ready();
-        </script>
+
 
