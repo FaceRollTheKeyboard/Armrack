@@ -9,7 +9,8 @@ define([
         'text!../../ui/MDEditor/MDEditor.html',
         'css!../../ui/MDEditor/MDEditor.css',
         "../../ui/MDEditor/markdown",
-        "../../ui/MDEditor/prettify"
+        "../../ui/MDEditor/prettify",
+        '../../ui/modal/modal'
     ],
     function (avalon,jquery, html) {
         var widget = avalon.ui.MDEditor = function (element, data, vmodels) {
@@ -30,7 +31,7 @@ define([
                     element.innerHTML = html
 
 
-                    require(['../../ui/modal/modal'],function(){
+//                    require(['../../ui/modal/modal'],function(){
                         //扫描新添加进来的DOM节点，一定要传第二个参数，否则有的东西扫描不到
                         avalon.scan(element, [vm].concat(vmodels))
 
@@ -43,7 +44,7 @@ define([
                         if (typeof vm.onInit === "function") {
                             vm.onInit.call(element, vm, options, vmodels)
                         }
-                    })
+//                    })
 
 
                     marked.setOptions({
@@ -86,6 +87,7 @@ define([
                 /********以下是正常的组件的各个属性********/
                 now: "1",
                     md:'',
+                html:"",
                 $opt:{},
                 //本地缓存
                 isHTML5:false,
@@ -135,9 +137,10 @@ define([
 
                 //文档编译
                 trs:function(){
-                    var result=marked(vm.md);
-                    document.getElementById('doc-show').innerHTML = result;
-                    document.getElementById('read-only').innerHTML = result;
+//                    var result=marked(vm.md);
+//                    document.getElementById('doc-show').innerHTML = result;
+//                    document.getElementById('read-only').innerHTML = result;
+                    vm.html=marked(vm.md)+'<br/><br/><br/><br/><br/><br/>'
                     //执行本地缓存
                     if (vm.isHTML5 === true) {
                         window.localStorage.setItem("lastMD", vm.md)
