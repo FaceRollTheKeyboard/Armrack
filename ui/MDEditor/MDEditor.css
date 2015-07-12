@@ -37,7 +37,8 @@
     display: block;
 
     margin-bottom: 5px;
-background-color: #ffffff;
+    background-color: #ffffff;
+
 }
 .md-nav:after{
     clear: both
@@ -53,8 +54,8 @@ background-color: #ffffff;
 }
 .md-nav a{
     position: static;
-    display: block
-
+    display: block;
+    text-decoration: none;
 }
 .md-dropdown-menu{
     position: absolute;
@@ -223,7 +224,7 @@ background-color: #ffffff;
 
     margin-top: -7px;
     padding-bottom: 6px;
-
+    text-decoration: none;
     text-shadow: 2px 7px 3px rgba(63, 63, 63, 0.21);
 
 
