@@ -6,7 +6,8 @@
  */
 define([
     "avalon",
-    'css!../../ui/modal/modal.css'
+    'css!../../ui/modal/modal.css',
+    '../../ui/modal/mousePos'
 ], function (avalon, css) {
     var widget = avalon.ui.modal = function (element, data, vmodels) {
         var options = data.modalOptions
@@ -59,9 +60,9 @@ define([
             sy: 0,//弹框开始位置Y坐标
             //鼠标位置
             getMouse:function(ev){
-
+                console.log(ev)
                 ev = ev || window.event;
-                var mousePos = mouseCoords(ev);
+//                var mousePos = mouseCoords(ev);
 //alert(ev.pageX);
                 //获取滚动高度
                 var ST=0;
@@ -84,16 +85,7 @@ define([
                     vm.my = mousePos.y;
                 }
 
-                //抓取位置的函数
-                function mouseCoords(ev) {
-                    if (ev.pageX || ev.pageY) {
-                        return {x: ev.pageX, y: ev.pageY};
-                    }
-                    return {
-                        x: ev.clientX + document.body.scrollLeft - document.body.clientLeft,
-                        y: ev.clientY + document.body.scrollTop - document.body.clientTop
-                    };
-                }
+
             },
 
 

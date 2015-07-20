@@ -13,14 +13,13 @@
             "info":"图片上传组件"
         },
         {
-          "name":"bowser",
+          "name":"browser",
             "info":"浏览器检测组件"
         },
         {
             "name":"MDEditor",
             "info":"md编辑器组件"
         }
-
     ]
 
 }
