@@ -38,6 +38,7 @@ define("door", function () {
 
                                 //执行已经登录的预定动作
                                 active.notLogin();
+
                             }
                             else {
                                 door.logined = true;
@@ -48,15 +49,21 @@ define("door", function () {
                                 }
 
 
-                                setCookie("tsy", data.tsy);
-                                setCookie("un", data.un);
-                                setCookie("uid", data.uid);
-                                setCookie("HURL",data.HURL)
 
                                 nav.inSide=true;
                                 nav.user.UserName=data.un
+                                nav.user.uid=data.uid
+                                console.log("uid:"+nav.user.uid)
 
                             }
+
+                            cache.go({
+                                "tsy": data.tsy,
+                                "un": data.un,
+                                "uid": data.uid,
+                                "HURL":data.HURL
+                            })
+
                         }
                     });
                 });
@@ -80,6 +87,7 @@ define("door", function () {
             setTimeout(function () {
                 if(door.logined === true){
                     var now = new Date();
+                    door.locked=true
                     door.comeIn({
                         haveLogin: function () {
                             console.log("来自" +
@@ -96,7 +104,7 @@ define("door", function () {
                 }
 
 
-            }, 1140000)
+            }, 600000)
         }
     }
 });
