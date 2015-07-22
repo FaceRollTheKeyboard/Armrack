@@ -59,9 +59,20 @@ define([
                     });
 
                     console.log("【markdown编辑器模块加载完成！】");
-                    //vm.toWrite();//切换为专注书写模式
-                    //vm.toRead();//切换为纯净阅读模式
-                    vm.toBoth();//切换为实时预览模式
+
+                    switch (vm.initType) {
+                        case 0:
+                            vm.toWrite();//切换为专注书写模式
+                            break;
+                        case 1:
+                            vm.toBoth();//切换为实时预览模式
+                            break;
+                        case 2:
+                            vm.toRead();//切换为纯净阅读模式
+                            break;
+                    }
+
+
                     vm.autoHeight();//自适应高度
                     vm.doubleScroll();//实时预览双滚动
                     setTimeout(function () {
@@ -88,6 +99,7 @@ define([
                 html: "",
                 loadLocaDoc: true,
                 $opt: {},
+                initType: 1,//0为初始纯净模式；1为初始双屏模式；2为初始阅读模式
                 //本地缓存
                 isHTML5: false,
                 getLoaclDoc: function () {
@@ -196,16 +208,22 @@ define([
                     //变形完成
                     vm.now = 2
                 },
-
+                height: "auto",
                 autoHeight: function () {
-                    var adaptHeight = function () {
-                        var x = $(window).height();
-                        $('.doc-layout').css('height', (x - 90) + 'px');
-                    };
-                    adaptHeight();
-                    $(window).resize(function () {
+
+                    if (vm.height == "auto") {
+                        var adaptHeight = function () {
+                            var x = $(window).height();
+                            $('.doc-layout').css('height', (x - 90) + 'px');
+                        };
                         adaptHeight();
-                    });
+                        $(window).resize(function () {
+                            adaptHeight();
+                        });
+                    }
+                    else {
+                        $('.doc-layout').css('height', (vm.height - 90) + 'px');
+                    }
 
 
                 },
