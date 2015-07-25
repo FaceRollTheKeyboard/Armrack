@@ -27,7 +27,7 @@ define([
                 element.setAttribute("ms-css-padding-top", "top")
                 element.setAttribute("ms-css-padding-left", "left")
                 element.setAttribute("ms-click", "getOut")
-                element.className = 'modal'
+                element.className = 'tsy-modal'
                 element.children[0].setAttribute("ms-css-opacity", "opacity")
                 element.children[0].setAttribute("ms-css-transform", "transform")
                 element.children[0].setAttribute('ms-on-mouseover','can(false)')
