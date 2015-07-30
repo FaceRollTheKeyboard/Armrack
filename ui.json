@@ -19,6 +19,10 @@
         {
             "name":"MDEditor",
             "info":"md编辑器组件"
+        },
+        {
+            "name":"ws",
+            "info":"WebScoket通信组件"
         }
     ]
 }
