@@ -1,7 +1,9 @@
 /**
  * Created by mooshroom on 2015-07-30.
  * webScoket通信组件
- * 版本：V2.0.0
+ * 版本：V2.0.1
+ *
+ *
  *
  */
 define([
@@ -22,7 +24,7 @@ define([
                     vm.onInit.call(element, vm, options, vmodels)
                 }
 
-//                vm.start()
+                vm.start()
 
                 setInterval(function(){
                     if(vm.state!=1){
@@ -48,6 +50,8 @@ define([
 
             reStartTime:3000,//断线重连时间
             heartTime:50000,//心跳间隔时间
+
+            sendList:[],//被阻塞的请求列表，将在连接成功之后发送
             onopen: function () {//成功连接之后的额外回调
 
             },
@@ -93,7 +97,10 @@ define([
                         console.log("websocket连接成功：" + server, 1, 3000);
                         console.log("连接成功："+evt)
                         vm.state = 1;
-                        //保持心跳
+                        //发送阻塞列表
+                        for(var i=0;i<vm.sendList.length;i++){
+                            window.webSocketLinks[objId].send(vm.sendList[i])
+                        }
 
                     };
 
@@ -124,15 +131,15 @@ define([
             mF:{},//准备执行的回调方法
             call: function (opt) {
                 /*传入opt标准格式：
-                * {
-                     i:"",//指令,必须有
-                     data:"",//数据，看情况
-                     success：function(data){}
-                     //回调函数，一般都有，用于执行，本次请求处理完成之后回调的方法，会在这个函数中传入data，也就是服务器返回过来的数据
+                 * {
+                 i:"",//指令,必须有
+                 data:"",//数据，看情况
+                 success：function(data){}
+                 //回调函数，一般都有，用于执行，本次请求处理完成之后回调的方法，会在这个函数中传入data，也就是服务器返回过来的数据
 
-                  }
+                 }
 
-                * */
+                 * */
                 var opt=opt||{}
                 if(typeof opt=="object"&&opt!={}){
                     //抓取数据区
@@ -152,12 +159,20 @@ define([
 
                     var t=guid()
 
-                     //合成发送字符串
+                    //合成发送字符串
                     var obj={i:i,t:t,d:d}
                     var str=JSON.stringify(obj)
 
-                    //发送
-                    window.webSocketLinks[objId].send(str)
+
+                    //连接状态检测
+                    if(vm.state==1){
+
+                        //发送
+                        window.webSocketLinks[objId].send(str)
+                    }
+                    else{
+                        vm.sendList.push(str)
+                    }
 
                     //缓存回调函数
                     if(typeof opt.success=="function"){
@@ -197,8 +212,9 @@ define([
                     //这次是服务器派来送数据的
                     if(typeof vm.mF[mmid]=="function"){
                         //执行回调
-                        vm.mF[mmid](res.d)
-
+                        var data=JSON.parse(res.d)
+                        vm.mF[mmid](data)
+//                        console.log(res.d)
                         //一分钟之后清除回调函数,腾出内存空间
                         setTimeout(function(){
                             vm.mF[mmid]=null
