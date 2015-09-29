@@ -11,7 +11,7 @@
 
 
 }
-.tip div{
+.tip>div>div{
     margin-bottom: 10px;
     padding:3px 12px ;
     background-color: rgba(255, 255, 255, 0.83);

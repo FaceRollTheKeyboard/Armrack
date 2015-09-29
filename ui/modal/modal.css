@@ -29,19 +29,19 @@
 
 .tsy-modal ,.tsy-modal > div{
     transition-property: all;
-    transition-duration: 0.25s;
+    transition-duration: 0.18s;
     transition-timing-function: ease-out;
     /* Firefox 4 */
     -moz-transition-property: all;
-    -moz-transition-duration: 0.25s;
+    -moz-transition-duration: 0.18s;
     -moz-transition-timing-function: ease-out;
     /* Safari 和 Chrome */
     -webkit-transition-property: all;
-    -webkit-transition-duration: 0.25s;
+    -webkit-transition-duration: 0.18s;
     -webkit-transition-timing-function: ease-out;
     /* Opera */
     -o-transition-property: all;
-    -o-transition-duration: 0.25s;
+    -o-transition-duration: 0.18s;
     -o-transition-timing-function: ease-out;
 }
 .tsy-modal{
@@ -56,6 +56,7 @@
     /*height: 100%;*/
     overflow-y: scroll;
     overflow-x: hidden;
+    background-color: rgba(0, 0, 0, 0.50);
 }
 
 .tsy-modal > div {
@@ -65,9 +66,9 @@
     /*margin-left: auto;*/
     /*margin-right: auto;*/
     /*margin-top: 8%;*/
-    padding: 10px 20px;
+    padding: 0px;
     background-color: #ffffff;
-    border-radius: 5px;
+    /*border-radius: 5px;*/
 
 
 }

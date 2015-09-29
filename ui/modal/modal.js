@@ -94,9 +94,22 @@ define([
             opacity: 1,
             transform: "scale(0)",
 
-            times: 0
+            times: 0,
+
+
+            bodyST:""
             //*模态框弹出*/
             , getIn: function (ev) {
+
+                //缓存页面的滚动高度
+                if(document.documentElement&&document.documentElement.scrollTop)
+                {
+                    vm.bodyST=document.documentElement.scrollTop;
+                }
+                else if(document.body)
+                {
+                    vm.bodyST=document.body.scrollTop;
+                }
 
                 vm.getMouse(ev)
 
@@ -107,6 +120,7 @@ define([
 
 
                 window.setTimeout(function () {
+                    vm.resetBodyST()
                     var ww=window.innerWidth || window.screen.availWidth;
                     console.log("ww:"+ww)
                     var bw=element.children[0].style.width
@@ -126,11 +140,13 @@ define([
                         vm.left=(ww-num)/2
                     }
 
-                    vm.top=120
+                    vm.top=70
                     vm.width = "100%"
                     vm.height = "100%"
                     vm.transform = "scale(1)"
-                }, 50)
+
+
+                }, 0.001)
                 document.body.style.overflowY = "hidden";
                 vm.times++
 
@@ -150,13 +166,27 @@ define([
                         vm.toggle = false;
                     }, 250)
                     document.body.style.overflowY = "auto"
-
+                    setTimeout(vm.resetBodyST,1)
                 }
                 else{
                     console.log("canGetOut:"+vm.canGetOut+";toggle:"+vm.toggle)
                 }
 
+
 //
+            },
+            resetBodyST:function(){
+                //设置页面的滚动高度
+                if(document.documentElement&&document.documentElement.scrollTop)
+                {
+                    document.documentElement.scrollTop =vm.bodyST;
+                }
+                else if(document.body)
+                {
+                    document.body.scrollTop=vm.bodyST;
+                }
+
+                //vm.bodyST=""
             },
             mustOut:function(){
                 if(vm.toggle){
@@ -167,6 +197,7 @@ define([
                         vm.toggle = false;
                     }, 250)
                     document.body.style.overflowY = "auto"
+                    setTimeout(vm.resetBodyST,1)
                 }
             }
 

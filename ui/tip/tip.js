@@ -80,8 +80,11 @@ define([
                 //message: 为提示的信息，id: 1为正常消息提示 0为错误消息提示
                 on: function (message, id, time) {
 
-                    if (id == 1) {
-                        vmodel.tips.push(message);
+                    var id=id||0
+                        vmodel.tips.push({
+                            msg:message,
+                            type:id
+                        });
                         if (time != null) {
                             setTimeout(function () {
                                 vmodel.off(message, id);
@@ -93,59 +96,27 @@ define([
                                 vmodel.off(message, id);
                             }, 15000);
                         }
-                    }
-                    else {
-                        vmodel.tipsError.push(message);
-                        if (time != null) {
-                            setTimeout(function () {
-                                vmodel.off(message, id);
-                            }, time);
-                        }
-                        else {
-                            //设置提示关闭默认时间
-                            setTimeout(function () {
-                                vmodel.off(message, id);
-                            }, 15000);
-                        }
-                    }
                 },
 
                 off: function (message, id) {
-                    if (id == 1) {
-                        //关闭所有正常提示信息
+
                         if (message == '') {
                             vmodel.tips = [];
                         }
                         for (var i = 0; i < vmodel.tips.length; i++) {
-                            if (vmodel.tips[i] == message) {
+                            if (vmodel.tips[i].msg == message&&vmodel.tips[i].type==id) {
                                 break;
                             }
                         }
                         vmodel.tips.splice(i, 1);
-                    }
-                    else {
-                        //关闭所有错误提示信息
-                        if (message == '') {
-                            vmodel.tipsError = [];
-                        }
-                        for (var i = 0; i < vmodel.tipsError.length; i++) {
-                            if (vmodel.tipsError[i] == message) {
-                                break;
-                            }
-                        }
-                        vmodel.tipsError.splice(i, 1);
-                    }
+
                 },
 
                 //手动关闭
-                close: function (index, id) {
+                close: function (index) {
 
                     //判断是正常提示消息还是错误提示消息（1为正常0为错误）
-                    if (id == 1) {
-                        vmodel.tips.splice(index, 1);
-                    } else {
-                        vmodel.tipsError.splice(index, 1);
-                    }
+                        vmodel.tips.splice(index,1);
                 }
                 /********以上是正常的组件的各个属性********/
             })

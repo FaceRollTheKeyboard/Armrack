@@ -202,8 +202,12 @@ define([
                         else {
                             console.log('没有正确传入回调函数')
                         }
-
+                        //回收opt
+                        opt={}
+                        console.log("done!!")
                     }
+
+
 
                     //缓存本次请求的OP，并设置过期时间
                     vm.op = newOp

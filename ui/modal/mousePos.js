@@ -16,7 +16,7 @@ define('mousePos',function(){
         return {x:xPos, y:yPos};
     }
 
-
+    window.mousePos={x:0,y:0}
     window.document.onmousemove=function(evt){
         window.mousePos=mousePosition(evt)
     }
